@@ -1,0 +1,23 @@
+{
+  "name": "news-explorer-frontend",
+  "version": "1.0.0",
+  "description": "Frontend & infrastructure for News-Explorer project",
+  "main": "index.js",
+  "scripts": {
+    "build": " cross-env process.env.NODE_ENV=production && rimraf dist && webpack --mode production",
+    "dev": "cross-env process.env.NODE_ENV=development webpack-dev-server --mode development --open --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppridanov/news-explorer-frontend.git"
+  },
+  "author": "Petr Pridanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ppridanov/news-explorer-frontend/issues"
+  },
+  "homepage": "https://github.com/ppridanov/news-explorer-frontend#readme",
+  "devDependencies": {
+    "webpack": "^4.41.5"
+  }
+}
