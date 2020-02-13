@@ -1,0 +1,7 @@
+@import url('./vendor/fonts/fonts.css');
+@import url('./blocks/header/header.css');
+
+body {
+  margin: 0;
+  max-width: 1440px;
+}

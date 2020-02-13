@@ -1,0 +1,11 @@
+@import url('./__logo/nav__logo.css');
+@import url('./__menu-items/nav__menu-items.css');
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: Roboto;
+  margin-left: 104px;
+  margin-right: 105px;
+}

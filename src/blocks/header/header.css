@@ -1,0 +1,11 @@
+@import url('./nav/nav.css');
+
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+}
+
+.header__bg-img {
+  background-image: url('../../img/georgia-de-lotz--UsJoNxLaNo-unsplash.png');
+}

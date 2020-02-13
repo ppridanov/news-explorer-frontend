@@ -1,0 +1,7 @@
+.nav__login-button {
+  height: 50px;
+  border: solid #fff 1px;
+  padding: 0 15px;
+  border-radius: 50px;
+  background-color: transparent;
+}
