@@ -10,15 +10,51 @@
 <body>
   <div class="page">
     <header class="header header__bg-img">
-      <nav class="nav">
-        <a href="#" class="nav__logo">NewsExplorer</a>
-        <ul class="nav__menu-items">
-          <li class="nav__menu-item"><a href="#" class="nav__link nav__link_active">Главная</a></li>
-          <li class="nav__menu-item"><button class="nav__link nav__login-button">Авторизоваться</button></li>
-        </ul>
-      </nav>
-      <div class="search"></div>
+      <div class="container">
+        <nav class="nav">
+          <a href="#" class="nav__logo">NewsExplorer</a>
+          <ul class="nav__menu-items">
+            <li class="nav__menu-item"><a href="#" class="nav__link nav__link_active">Главная</a></li>
+            <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button">Авторизоваться</button></li>
+          </ul>
+        </nav>
+        <section class="search">
+          <h1 class="search__title">Что в мире творится?</h1>
+          <p class="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своем личном кабинете.</p>
+          <form class="search__form">
+            <input class="search__input search__input_name_article" placeholder="Введите тему новости">
+            <button class="search__submit-button">Искать</button>
+          </form>
+        </section>
+      </div>
     </header>
+    <section class="about">
+      <div class="container">
+        <div class="about__container">
+          <img src="./img/image-03.png" class="about__user-avatar"  alt="This is avatar">
+          <div class="about__text-container">
+            <h3 class="about__title">Об авторе</h3>
+            <p class="about__text">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы занимаетесь, какими технологиями разработки владеете.</p>
+            <p class="about__text">Также можно рассказать о процессе обучения в Практикуме, чему вы тут научились, и чем можете помочь потенциальным заказчикам.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <p class="footer__copyrigth">© 2020 Supersite, Powered by News API</p>
+          <nav class="nav">
+            <ul class="footer__menu">
+              <li class="footer__menu-item"><a href="#" class="footer__link">Главная</a></li>
+              <li class="footer__menu-item"><a href="#" class="footer__link">Яндекс.Практикум</a></li>
+            </ul>
+            <img class="footer__icon" src="" alt="github icon">
+            <img class="footer__icon" src="" alt="facebook icon">
+          </nav>
+        </div>
+      </div>
+    </footer>
   </div>
   <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>

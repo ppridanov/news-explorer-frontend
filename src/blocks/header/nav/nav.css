@@ -2,10 +2,9 @@
 @import url('./__menu-items/nav__menu-items.css');
 
 .nav {
+  height: 80px;
   display: flex;
   justify-content: space-between;
-  width: 100%;
   font-family: Roboto;
-  margin-left: 104px;
-  margin-right: 105px;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
 }

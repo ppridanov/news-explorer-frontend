@@ -1,9 +1,9 @@
 @import url('./nav/nav.css');
+@import url('./search/search.css');
 
 .header {
   display: flex;
-  flex-direction: row;
-  height: 80px;
+  height: 576px;
 }
 
 .header__bg-img {
