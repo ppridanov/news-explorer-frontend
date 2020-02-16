@@ -28,30 +28,70 @@
         </section>
       </div>
     </header>
-    <section class="about">
-      <div class="container">
-        <div class="about__container">
-          <img src="./img/image-03.png" class="about__user-avatar"  alt="This is avatar">
-          <div class="about__text-container">
-            <h3 class="about__title">Об авторе</h3>
-            <p class="about__text">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы занимаетесь, какими технологиями разработки владеете.</p>
-            <p class="about__text">Также можно рассказать о процессе обучения в Практикуме, чему вы тут научились, и чем можете помочь потенциальным заказчикам.</p>
+    <main class="main">
+      <section class="articles">
+        <div class="container">
+          <h3 class="title articles__title">Результаты поиска</h3>
+          <div class="articles__container">
+            <article clas="article">
+              <div class="article__image-container">
+                <img class="article__image" src="<%=require('./img/image_08.png') %>">
+                <button class="article__save-icon"></button>
+              </div>
+              <p class="article__date">2 августа, 2019</p>
+              <h3 class="article__name">Национальное достояние – парки</h3>
+              <p class="article__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
+              <a class="article__link" href="#">Лента.ру</a>
+            </article>
+            <article clas="article">
+              <div class="article__image-container">
+                <img class="article__image" src="<%=require('./img/image_04.png') %>">
+                <button class="article__save-icon"></button>
+              </div>
+              <p class="article__date">2 августа, 2019</p>
+              <h3 class="article__name">Лесные огоньки: история одной фотографии</h3>
+              <p class="article__description">Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного
+                из местных чудес природы.</p>
+              <a class="article__link" href="#">Медуза</a>
+            </article>
+            <article clas="article">
+              <div class="article__image-container">
+                <img class="article__image" src="<%=require('./img/image_07.png') %>">
+                <button class="article__save-icon"></button>
+              </div>
+              <p class="article__date">2 августа, 2019</p>
+              <h3 class="article__name">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
+              <p class="article__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
+              <a class="article__link" href="#">Риа</a>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <section class="about">
+        <div class="container">
+          <div class="about__container">
+            <img src="<%=require('./img/image-03.png') %>" class="about__user-avatar"  alt="This is avatar">
+            <div class="about__text-container">
+              <h3 class="title">Об авторе</h3>
+              <p class="about__text">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы занимаетесь, какими технологиями разработки владеете.</p>
+              <p class="about__text">Также можно рассказать о процессе обучения в Практикуме, чему вы тут научились, и чем можете помочь потенциальным заказчикам.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
     <footer class="footer">
       <div class="container">
         <div class="footer__container">
           <p class="footer__copyrigth">© 2020 Supersite, Powered by News API</p>
-          <nav class="nav">
+          <div class="footer__links-container">
             <ul class="footer__menu">
               <li class="footer__menu-item"><a href="#" class="footer__link">Главная</a></li>
               <li class="footer__menu-item"><a href="#" class="footer__link">Яндекс.Практикум</a></li>
             </ul>
-            <img class="footer__icon" src="" alt="github icon">
-            <img class="footer__icon" src="" alt="facebook icon">
-          </nav>
+            <a class="footer__link"><img class="footer__icon" src="<%=require('./img/github.svg') %>" alt="github icon"></a>
+            <a class="footer__link"><img class="footer__icon" src="<%=require('./img/facebook.svg') %>" alt="facebook icon"></a>
+          </div>
         </div>
       </div>
     </footer>
