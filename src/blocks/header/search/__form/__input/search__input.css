@@ -19,3 +19,11 @@
 .search__input:focus {
   color: #1A1B22;
 }
+
+@media screen and (max-width: 520px) {
+  .search__input {
+    position: relative;
+    padding-left: unset;
+    width: 100%;
+  }
+}

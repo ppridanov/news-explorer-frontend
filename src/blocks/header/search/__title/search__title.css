@@ -7,3 +7,10 @@
   color: #FFFFFF;
   margin: 0 0 32px;
 }
+
+@media screen and (max-width: 520px) {
+  .search__title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+}

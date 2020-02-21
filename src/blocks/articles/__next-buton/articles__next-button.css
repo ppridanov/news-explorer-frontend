@@ -21,5 +21,12 @@
 @media screen and (max-width: 940px) {
   .articles__next-button {
     margin: 32px 0 32px;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .articles__next-button {
+    width: 100%;
   }
 }

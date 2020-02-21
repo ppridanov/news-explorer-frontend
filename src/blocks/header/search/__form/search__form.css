@@ -12,3 +12,9 @@
     height: 118px;
   }
 }
+
+@media screen and (max-width: 520px) {
+  .search__form {
+    height: auto;
+  }
+}
