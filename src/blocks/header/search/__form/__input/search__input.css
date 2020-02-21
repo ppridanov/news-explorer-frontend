@@ -15,3 +15,7 @@
   color: #B6BCBF;
   outline: none;
 }
+
+.search__input:focus {
+  color: #1A1B22;
+}

@@ -1,5 +1,6 @@
 @import url('./__logo/nav__logo.css');
 @import url('./__menu-items/nav__menu-items.css');
+@import url('./__burger-button/nav__burger-button.css');
 
 .nav {
   height: 80px;
@@ -7,4 +8,10 @@
   justify-content: space-between;
   font-family: Roboto;
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 640px) {
+  .nav {
+    flex-direction: column;
+  }
 }

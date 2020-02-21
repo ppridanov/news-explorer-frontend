@@ -1,3 +1,4 @@
+@import url('./blocks/page.css');
 @import url('./blocks/title/title.css');
 @import url('./vendor/fonts/fonts.css');
 @import url('./blocks/header/header.css');
@@ -5,8 +6,15 @@
 @import url('./blocks/articles/articles.css');
 @import url('./blocks/about/about.css');
 @import url('./blocks/footer/footer.css');
+@import url('./blocks/circle-preloader/circle-preloader.css');
+@import url('./blocks/popup/popup.css');
+@import url('./blocks/error/error.css');
+@import url('./blocks/saved-articles/saved-articles.css');
+@import url('./blocks/articles-container/articles-container.css');
+@import url(./blocks/article/article.css);
+@import url(./blocks/main-text/main-text.css);
 
 body {
-  margin: 0;
   max-width: 1440px;
+  margin: 0 auto;
 }

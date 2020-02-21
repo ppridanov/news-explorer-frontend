@@ -1,0 +1,6 @@
+.nav__burger-button {
+  display: none;
+  background-image: url(../../../../img/menu.svg);
+  width: 24px;
+  height: 24px;
+}

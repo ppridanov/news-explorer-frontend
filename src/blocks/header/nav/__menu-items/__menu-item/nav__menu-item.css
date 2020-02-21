@@ -4,5 +4,12 @@
 
 .nav__menu-item {
   margin-top: 30px;
-  margin-right: 35px;
+  margin-right: 34px;
+}
+
+@media screen and (max-width: 700px) {
+  .nav__menu-item {
+    margin-top: 30px;
+    margin-right: 8px;
+  }
 }
