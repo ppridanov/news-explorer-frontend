@@ -6,11 +6,14 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  width: 90%;
 }
 
 @media screen and (max-width: 640px) {
   .nav__menu-items {
     flex-direction: column;
     display: none;
+    position: absolute;
+    top: 80px;
   }
 }

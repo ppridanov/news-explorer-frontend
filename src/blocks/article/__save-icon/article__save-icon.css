@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.article__save-icon:hover {
+.article__save-icon_hover {
   background-image: url('../../../img/save-icon_hover.svg');
 }
 

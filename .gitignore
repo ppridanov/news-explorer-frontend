@@ -5,7 +5,8 @@ npm-debug.log*
 .npm
 .DS_Store
 .idea
+.sublime
+.vscode
 /dist
-/.vscode
 .env
 *.log

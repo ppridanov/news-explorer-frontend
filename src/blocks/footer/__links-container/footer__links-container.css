@@ -8,3 +8,17 @@
     margin-top: 10px;
   }
 }
+
+@media screen and (max-width: 520px) {
+  .footer__links-container {
+    align-items: unset;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 468 px) {
+  .footer__links-container {
+    justify-content: space-between;
+  }
+}

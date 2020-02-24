@@ -1,4 +1,5 @@
 @import url('./blocks/page.css');
+@import url('./blocks/overlay/overlay.css');
 @import url('./blocks/title/title.css');
 @import url('./vendor/fonts/fonts.css');
 @import url('./blocks/header/header.css');

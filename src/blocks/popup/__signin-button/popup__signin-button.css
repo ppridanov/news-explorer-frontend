@@ -1,5 +1,7 @@
 .popup__signin-button {
   color: #2F71E5;
+  border: none;
+  background-color: transparent;
 }
 
 .popup__signin-button_top {

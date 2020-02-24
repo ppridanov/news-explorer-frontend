@@ -1,5 +1,6 @@
 @import url('./nav/nav.css');
 @import url('./search/search.css');
+@import url('./__overlay/header__overlay.css');
 
 .header {
   display: flex;

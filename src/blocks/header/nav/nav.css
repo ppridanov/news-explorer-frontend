@@ -1,6 +1,7 @@
 @import url('./__logo/nav__logo.css');
 @import url('./__menu-items/nav__menu-items.css');
 @import url('./__burger-button/nav__burger-button.css');
+@import url('./__close-button/nav__close-button.css');
 
 .nav {
   height: 80px;
@@ -10,6 +11,10 @@
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   padding-right: 106px;
   padding-left: 102px;
+}
+
+.nav_black-theme {
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.6)
 }
 
 @media screen and (max-width: 940px) {
@@ -24,5 +29,6 @@
     align-items: center;
     padding-right: 16px;
     padding-left: 16px;
+    z-index: 2;
   }
 }
