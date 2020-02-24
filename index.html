@@ -5,17 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>News Explorer</title>
-  <link rel="stylesheet" href="style.c9e06707d2cd6cb17baf.css">
+  <link rel="stylesheet" href="style.c08e965a0d0d9adf3b41.css">
+  <link rel="favicon" href="./img/favicon.png" type="image/png">
 </head>
 <body>
   <div class="page">
+    <div class="overlay"></div>
     <header class="header header__bg-img">
-      <div class="container">
+      <div class="header__overlay"></div>
         <nav class="nav">
-          <a href="#" class="nav__logo">NewsExplorer</a>
+          <a href="/" class="nav__logo">NewsExplorer</a>
+          <button class="nav__burger-button"></button>
+          <button class="nav__close-button"></button>
           <ul class="nav__menu-items">
-            <li class="nav__menu-item"><a href="#" class="nav__link nav__link_active">Главная</a></li>
-            <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button">Авторизоваться</button></li>
+            <li class="nav__menu-item"><a href="/" class="nav__link nav__link_active">Главная</a></li>
+            <!-- <li class="nav__menu-item"><a href="/save-articles.html" class="nav__link">Сохраненные статьи</a></li> -->
+            <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button">Авторизоваться</button>
+            <!-- <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button">Грета <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z" fill="#fff"/>
+              </svg></button></li> -->
           </ul>
         </nav>
         <section class="search">
@@ -26,13 +34,156 @@
             <button class="search__submit-button">Искать</button>
           </form>
         </section>
-      </div>
     </header>
-    <section class="about">
-      <div class="container">
-        <img class="about__user-avatar" src="[object Module]" alt="This is avatar">
+    <main class="main">
+      <section class="articles">
+        <div class="container">
+          <div class="articles__results">
+            <!-- Здесь загружается если ничего не найдено -->
+            <!-- <div class="articles__not-found-container">
+              <img class="articles__not-found-image" src="5bbc83beac9bf0c6f7dff7496593c15f.svg">
+              <h3 class="articles__not-found-title">Ничего не найдено</h3>
+              <p class="articles__not-found-text">К сожалению по вашему запросу ничего не найдено.</p>
+            </div> -->
+            <!-- Конец блока -->
+
+            <!-- Здесь загружается прелоадер -->
+            <!-- <div class="articles__searching">
+              <i class="circle-preloader"></i>
+              <span class="circle-preloader__text">Идет поиск новостей...</span>
+            </div> -->
+            <!-- Конец блока прелоадера -->
+
+            <!-- Здесь основной блок с карточками новостей -->
+            <h3 class="title articles__title">Результаты поиска</h3>
+            <div class="articles-container">
+              <article class="article">
+                <div class="article__image-container">
+                  <img class="article__image" src="e5434dd66ddfb41d992d38bfa468330e.png" alt="News Image">
+                  <button class="article__save-icon"></button>
+                </div>
+                <div class="article__text-container">
+                  <p class="article__date">2 августа, 2019</p>
+                  <h3 class="article__name">Национальное достояние – парки</h3>
+                  <p class="article__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
+                  <a class="article__link" href="https://https://lenta.ru/ target="_blank"">Лента.ру</a>
+                </div>
+              </article>
+              <article class="article">
+                <div class="article__image-container">
+                  <img class="article__image" src="ad031ccd61064cac010cb8a6036f39da.png" alt="News Image">
+                  <button class="article__save-icon"></button>
+                </div>
+                <div class="article__text-container">
+                  <p class="article__date">2 августа, 2019</p>
+                  <h3 class="article__name">Лесные огоньки: история одной фотографии</h3>
+                  <p class="article__description">Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного
+                    из местных чудес природы.</p>
+                  <a class="article__link" href="https://meduza.io" target="_blank">Медуза</a>
+                </div>
+              </article>
+              <article class="article">
+                <div class="article__image-container">
+                  <img class="article__image" src="f4733af4b67dfb91a9479f9d42dfdb62.png" alt="News Image">
+                  <span class="article__signin-msg">Войдите, чтобы сохранять статьи</span>
+                  <button class="article__save-icon"></button>
+                </div>
+                <div class="article__text-container">
+                  <p class="article__date">2 августа, 2019</p>
+                  <h3 class="article__name">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
+                  <p class="article__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
+                  <a class="article__link" href="https://ria.ru" target="_blank">Риа</a>
+                </div>
+              </article>
+            </div>
+            <button class="articles__next-button">Показать еще</button>
+            <!-- Конец блока результатов -->
+          </div>
+        </div>
+      </section>
+      <section class="about">
+        <div class="container">
+          <div class="about__container">
+            <img src="a23c8e25a795ed4553e2f44b34b4bb31.png" class="about__user-avatar"  alt="This is avatar">
+            <div class="about__text-container">
+              <h3 class="title">Об авторе</h3>
+              <p class="about__text">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы занимаетесь, какими технологиями разработки владеете.</p>
+              <p class="about__text">Также можно рассказать о процессе обучения в Практикуме, чему вы тут научились, и чем можете помочь потенциальным заказчикам.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="popup popup__login" id='login'>
+      <div class="popup__content">
+        <img src="0b9bf75438159e8b186c12d02678f9b8.svg" alt="" class="popup__close">
+        <h3 class="popup__title">Вход</h3>
+        <form class="popup__form popup__login" novalidate name="login">
+          <div class="popup__input-container">
+            <span class="popup__input-name">Email</span>
+            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту">
+            <span class="error-message error__email">ERROR</span>
+          </div>
+          <div class="popup__input-container">
+            <span class="popup__input-name">Пароль</span>
+            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль">
+            <span class="error-message error__password"></span>
+          </div>
+          <button type="submit" data-target='login' name="accept" class='button popup__button popup__button_save'>Войти</button>
+          <p class="popup__signup-text">или <span class="popup__signup-button">Зарегистрироваться</span></p>
+        </form>
       </div>
-    </section>
+    </div>
+    <div class="popup popup__signup" id='signup'>
+      <div class="popup__content">
+        <img src="0b9bf75438159e8b186c12d02678f9b8.svg" alt="" class="popup__close">
+        <h3 class="popup__title">Регистрация</h3>
+        <form class="popup__form popup__signup" novalidate name="signup">
+          <div class="popup__input-container">
+            <span class="popup__input-name">Email</span>
+            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту">
+            <span class="error-message error__email"></span>
+          </div>
+          <div class="popup__input-container">
+            <span class="popup__input-name">Пароль</span>
+            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль">
+            <span class="error-message error__password"></span>
+          </div>
+          <div class="popup__input-container">
+            <span class="popup__input-name">Имя</span>
+            <input type="text" required name="name" class="popup__input popup__input_type_name" placeholder="Введите своё имя">
+            <span class="error-message error__name"></span>
+          </div>
+          <span class="error-message error__email-used">Такой пользователь уже есть</span>
+          <button type="submit" data-target='signup' name="accept" class='button popup__button popup__button_save'>Регистрация</button>
+          <p class="popup__signup-text">или <span class="popup__signin-button">Войти</span></p>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup__success" id='success'>
+      <div class="popup__content">
+        <img src="0b9bf75438159e8b186c12d02678f9b8.svg" alt="" class="popup__close">
+        <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
+        <span class="popup__signin-button popup__signin-button_top">Выполнить вход</span>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <p class="footer__copyrigth">© 2020 Supersite, Powered by News API</p>
+          <div class="footer__links-container">
+            <ul class="footer__menu">
+              <li class="footer__menu-item"><a href="/" class="footer__link">Главная</a></li>
+              <li class="footer__menu-item"><a href="https://praktikum.yandex.ru" target="_blank" class="footer__link">Яндекс.Практикум</a></li>
+            </ul>
+            <div class="footer__icons-container">
+              <a class="footer__link" href="https://github.com" target="_blank"><img class="footer__icon" src="45fc9be3ec228f171e175487491315bb.svg" alt="github icon"></a>
+              <a class="footer__link" href="https://facebook.com" target="_blank"><img class="footer__icon" src="400b31da08bea4d92e859c0373e85f8b.svg" alt="facebook icon"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
   <script src="main.53a332175ca805b48372.js"></script>
 </body>
