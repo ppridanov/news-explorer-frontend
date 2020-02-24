@@ -6,7 +6,6 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 90%;
 }
 
 @media screen and (max-width: 640px) {
@@ -15,5 +14,11 @@
     display: none;
     position: absolute;
     top: 80px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .nav__menu-items {
+    width: 90%;
   }
 }
