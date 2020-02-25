@@ -42,34 +42,43 @@ function openBurgerMenu(event) {
   event.preventDefault();
   headerOverlay.style.display = 'flex';
   overlay.style.display = 'flex';
-  burgerButton.style.display = 'none';
+  burgerButton.classList.add('nav__burger-button_none')
   closeBurgerButton.style.display = 'flex';
   menuItems.style.display = 'flex';
 }
 
 function closeBurgerMenu(event) {
-  event.preventDefault();
   headerOverlay.style.display = 'none';
   overlay.style.display = 'none';
-  burgerButton.style.display = 'flex';
+  burgerButton.classList.remove('nav__burger-button_none')
   closeBurgerButton.style.display = 'none';
   menuItems.style.display = 'none';
 }
 
 function openPopup(event) {
   event.preventDefault();
+  if (document.documentElement.clientWidth === 320) {
+    burgerButton.classList.add('nav__burger-button_none');
+  }
+  burgerButton.classList.add('nav__burger-button_none')
   const modalId = (event.target.dataset.target);
   const modal = document.getElementById(modalId);
   modal.classList.add('popup_is-opened');
 }
 
 function closePopup(event) {
+  if (document.documentElement.clientWidth === 320) {
+    burgerButton.classList.remove('nav__burger-button_none');
+  }
   const popupTarget = event.target.parentNode.parentNode;
   popupTarget.classList.remove('popup_is-opened');
 }
 
 function changePopup() {
   if (document.querySelector('.popup_is-opened')) {
+    if (document.documentElement.clientWidth === 320) {
+      burgerButton.classList.remove('nav__burger-button_none');
+    }
     const popupIsOpened = document.querySelector('.popup_is-opened');
     popupIsOpened.classList.remove('popup_is-opened');
   }
@@ -78,6 +87,7 @@ function changePopup() {
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('nav__login-button') || event.target.classList.contains('popup__signin-button')) {
     changePopup();
+    closeBurgerMenu();
     openPopup(event);
   }
   if (event.target.classList.contains('popup__signup-button')) {

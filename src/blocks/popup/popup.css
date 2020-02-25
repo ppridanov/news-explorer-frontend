@@ -26,3 +26,11 @@
   justify-content: center;
   display: none;
 }
+
+@media screen and (max-width: 640px) {
+  .popup {
+    top: 80px;
+    align-items: flex-start;
+    z-index: 3;
+  }
+}

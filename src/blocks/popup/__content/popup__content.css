@@ -13,3 +13,11 @@
     width: calc(100% - 60px);
   }
 }
+
+@media screen and (max-width: 320px) {
+  .popup__content {
+    border-radius: 10px 10px 0 0;
+    padding-bottom: 88px;
+    width: 100%;
+  }
+}
