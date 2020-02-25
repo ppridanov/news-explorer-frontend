@@ -1,4 +1,6 @@
 console.log('Hello, World!')
+//ВСЕ что тут сделано это на время верстки. В будующем это все я переделаю.
+
 import "./style.css";
 const overlay = document.querySelector('.overlay');
 const burgerButton = document.querySelector('.nav__burger-button');
@@ -87,7 +89,6 @@ function changePopup() {
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('nav__login-button') || event.target.classList.contains('popup__signin-button')) {
     changePopup();
-    closeBurgerMenu();
     openPopup(event);
   }
   if (event.target.classList.contains('popup__signup-button')) {
