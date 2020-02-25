@@ -8,7 +8,6 @@ const closeBurgerButton = document.querySelector('.nav__close-button');
 const headerOverlay = document.querySelector('.header__overlay');
 const menuItems = document.querySelector('.nav__menu-items');
 
-
 function saveButtonEvents() {
   const articleImageContainers = document.querySelectorAll('.article__image-container');
   articleImageContainers.forEach((el) => {
