@@ -128,15 +128,15 @@
       <div class="popup__content">
         <img src="<%=require('./img/close-mid.svg')%>" alt="" class="popup__close">
         <h3 class="popup__title">Вход</h3>
-        <form class="popup__form popup__login" novalidate name="login">
+        <form class="popup__form popup__login" name="login">
           <div class="popup__input-container">
             <span class="popup__input-name">Email</span>
-            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту">
+            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту" required pattern="^([a-z0-9_\-.]{2,})@([\w\-.]+)\.([a-z]{2,})?$">
             <span class="error-message error__email">ERROR</span>
           </div>
           <div class="popup__input-container">
             <span class="popup__input-name">Пароль</span>
-            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль">
+            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль" required minlength="8">
             <span class="error-message error__password"></span>
           </div>
           <button type="submit" data-target='login' name="accept" class='button popup__button popup__button_save'>Войти</button>
@@ -148,20 +148,20 @@
       <div class="popup__content">
         <img src="<%=require('./img/close-mid.svg')%>" alt="" class="popup__close">
         <h3 class="popup__title">Регистрация</h3>
-        <form class="popup__form popup__signup" novalidate name="signup">
+        <form class="popup__form popup__signup" name="signup">
           <div class="popup__input-container">
             <span class="popup__input-name">Email</span>
-            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту">
+            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту" required pattern="^([a-z0-9_\-.]{2,})@([\w\-.]+)\.([a-z]{2,})?$">
             <span class="error-message error__email"></span>
           </div>
           <div class="popup__input-container">
             <span class="popup__input-name">Пароль</span>
-            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль">
+            <input type='text' required name='password' class='popup__input popup__input_type_password' required minlength="8" placeholder="Введите пароль">
             <span class="error-message error__password"></span>
           </div>
           <div class="popup__input-container">
             <span class="popup__input-name">Имя</span>
-            <input type="text" required name="name" class="popup__input popup__input_type_name" placeholder="Введите своё имя">
+            <input type="text" required name="name" class="popup__input popup__input_type_name" placeholder="Введите своё имя" required pattern="^([А-ЯЁ][а-яё]+([\-/{1}]?[А-Я]{1}?[а-я]+?)?)$">
             <span class="error-message error__name"></span>
           </div>
           <span class="error-message error__email-used">Такой пользователь уже есть</span>
