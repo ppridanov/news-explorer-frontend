@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>News Explorer</title>
-  <link rel="stylesheet" href="style.a832c63ec5fa113e6d32.css">
+  <link rel="stylesheet" href="style.f216c1a09926f5972d4f.css">
   <link rel="favicon" href="./img/favicon.png">
 </head>
 <body>
@@ -126,17 +126,17 @@
     </main>
     <div class="popup popup__login" id='login'>
       <div class="popup__content">
-        <img src="0b9bf75438159e8b186c12d02678f9b8.svg" alt="" class="popup__close">
+        <img src="320171f65e758135602004d5258e9366.svg" alt="" class="popup__close">
         <h3 class="popup__title">Вход</h3>
-        <form class="popup__form popup__login" novalidate name="login">
+        <form class="popup__form popup__login" name="login">
           <div class="popup__input-container">
             <span class="popup__input-name">Email</span>
-            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту">
+            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту" required pattern="^([a-z0-9_\-.]{2,})@([\w\-.]+)\.([a-z]{2,})?$">
             <span class="error-message error__email">ERROR</span>
           </div>
           <div class="popup__input-container">
             <span class="popup__input-name">Пароль</span>
-            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль">
+            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль" required minlength="8">
             <span class="error-message error__password"></span>
           </div>
           <button type="submit" data-target='login' name="accept" class='button popup__button popup__button_save'>Войти</button>
@@ -146,22 +146,22 @@
     </div>
     <div class="popup popup__signup" id='signup'>
       <div class="popup__content">
-        <img src="0b9bf75438159e8b186c12d02678f9b8.svg" alt="" class="popup__close">
+        <img src="320171f65e758135602004d5258e9366.svg" alt="" class="popup__close">
         <h3 class="popup__title">Регистрация</h3>
-        <form class="popup__form popup__signup" novalidate name="signup">
+        <form class="popup__form popup__signup" name="signup">
           <div class="popup__input-container">
             <span class="popup__input-name">Email</span>
-            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту">
+            <input type="text" required name="email" class="popup__input popup__input_type_email" placeholder="Введите почту" required pattern="^([a-z0-9_\-.]{2,})@([\w\-.]+)\.([a-z]{2,})?$">
             <span class="error-message error__email"></span>
           </div>
           <div class="popup__input-container">
             <span class="popup__input-name">Пароль</span>
-            <input type='text' required name='password' class='popup__input popup__input_type_password' placeholder="Введите пароль">
+            <input type='text' required name='password' class='popup__input popup__input_type_password' required minlength="8" placeholder="Введите пароль">
             <span class="error-message error__password"></span>
           </div>
           <div class="popup__input-container">
             <span class="popup__input-name">Имя</span>
-            <input type="text" required name="name" class="popup__input popup__input_type_name" placeholder="Введите своё имя">
+            <input type="text" required name="name" class="popup__input popup__input_type_name" placeholder="Введите своё имя" required pattern="^([А-ЯЁ][а-яё]+([\-/{1}]?[А-Я]{1}?[а-я]+?)?)$">
             <span class="error-message error__name"></span>
           </div>
           <span class="error-message error__email-used">Такой пользователь уже есть</span>
@@ -172,7 +172,7 @@
     </div>
     <div class="popup popup__success" id='success'>
       <div class="popup__content">
-        <img src="0b9bf75438159e8b186c12d02678f9b8.svg" alt="" class="popup__close">
+        <img src="320171f65e758135602004d5258e9366.svg" alt="" class="popup__close">
         <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
         <span class="popup__signin-button popup__signin-button_top">Выполнить вход</span>
       </div>
@@ -195,7 +195,7 @@
       </div>
     </footer>
   </div>
-  <script src="main.eaa421927d4dc0a68919.js"></script>
+  <script src="main.94dc88835bb2426a298e.js"></script>
 </body>
 
 </html>
