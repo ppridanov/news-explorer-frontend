@@ -6,5 +6,7 @@
 
 .main-text {
   display: flex;
-  margin: 40px 0 55px;
+  padding: 40px 0 55px;
+  background-color: white;
+  width: 100%;
 }

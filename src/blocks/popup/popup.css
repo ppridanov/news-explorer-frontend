@@ -13,6 +13,7 @@
 @import url(./__signin-button/popup__signin-button.css);
 @import url(./__signup-button/popup__signup-button.css);
 @import url(./__signup-text/popup__signup-text.css);
+@import url(./error-message/error-message.css);
 
 .popup {
   position: fixed;

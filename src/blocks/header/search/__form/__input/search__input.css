@@ -3,22 +3,19 @@
   left: 0;
   top: 0;
   border-radius: 50px;
-  width: 90%;
-  height: 56px;
-  border: solid #fff;
+  width: 100%;
+  box-sizing: border-box;
+  height: 62px;
+  border: none;
   padding-left: 22px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  color: #B6BCBF;
-  outline: none;
+  color: black;
 }
 
-.search__input:focus {
-  color: #1A1B22;
-}
 
 @media screen and (max-width: 520px) {
   .search__input {

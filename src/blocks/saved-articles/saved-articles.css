@@ -3,4 +3,5 @@
 .saved-articles {
   display: flex;
   background: #f5f6f7;
+  flex-direction: column;
 }
