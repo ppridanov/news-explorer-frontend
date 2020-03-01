@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>News Explorer</title>
-  <link rel="stylesheet" href="style.f216c1a09926f5972d4f.css">
-  <link rel="favicon" href="./img/favicon.png" type="image/png">
+  <meta name="description" content="This project for interest news search">
+  <meta name="author" content="Petr Pridanov">
+  <meta name="keywords" content="Поиск новостей, новости, новости сейчас">
+  <link rel="stylesheet" href="style.81c608cbf1282af58425.css">
+  <link rel="shortcut icon" href="img/favicon.png" type="image/png">
 </head>
 <body>
   <div class="page">
@@ -29,20 +32,20 @@
       </nav>
     </header>
     <main class="main">
-      <section class="main-text">
-        <div class="container">
-          <p class="main-text__subtitle">Сохраненные статьи</p>
-          <h3 class="main-text__title">Грета, у вас 5<br> сохранённых статей</h3>
-          <p class="main-text__keys-text">По ключевым словам: <span class="main-text__word-key">Природа, Тайга</span> и <span class="main-text__word-key">2 другим</span></p>
-        </div>
-      </section>
       <section class="saved-articles">
+        <div class="main-text">
+          <div class="container">
+            <p class="main-text__subtitle">Сохраненные статьи</p>
+            <h3 class="main-text__title">Грета, у вас 5<br> сохранённых статей</h3>
+            <p class="main-text__keys-text">По ключевым словам: <span class="main-text__word-key">Природа, Тайга</span> и <span class="main-text__word-key">2 другим</span></p>
+          </div>
+        </div>
         <div class="container">
           <div class="saved-articles__card-container articles-container">
             <article class="article">
               <div class="article__image-container">
-                <span class="article__content-name">Природа</span>
-                <img class="article__image" src="e5434dd66ddfb41d992d38bfa468330e.png">
+                <h3 class="article__content-name">Природа</h3>
+                <img class="article__image" alt="Природа" src="img/image_08.png">
                 <button class="article__delete-icon"></button>
               </div>
               <div class="article__text-container">
@@ -54,8 +57,8 @@
             </article>
             <article class="article">
               <div class="article__image-container">
-                <span class="article__content-name">Природа</span>
-                <img class="article__image" src="ad031ccd61064cac010cb8a6036f39da.png">
+                <h3 class="article__content-name">Природа</h3>
+                <img class="article__image" alt="Природа" src="img/image_04.png">
                 <span class="article__delete-msg">Убрать из сохранённых</span>
                 <button class="article__delete-icon"></button>
               </div>
@@ -69,8 +72,8 @@
             </article>
             <article class="article">
               <div class="article__image-container">
-                <span class="article__content-name">Тайга</span>
-                <img class="article__image" src="f4733af4b67dfb91a9479f9d42dfdb62.png">
+                <h3 class="article__content-name">Тайга</h3>
+                <img class="article__image" alt="Тайга" src="img/image_07.png">
                 <button class="article__delete-icon"></button>
               </div>
               <div class="article__text-container">
@@ -82,8 +85,8 @@
             </article>
             <article class="article">
               <div class="article__image-container">
-                <span class="article__content-name">Парки</span>
-                <img class="article__image" src="f4733af4b67dfb91a9479f9d42dfdb62.png">
+                <h3 class="article__content-name">Парки</h3>
+                <img class="article__image" alt="Парки" src="img/image_07.png">
                 <button class="article__delete-icon"></button>
               </div>
               <div class="article__text-container">
@@ -95,8 +98,8 @@
             </article>
             <article class="article">
               <div class="article__image-container">
-                <span class="article__content-name">Фотография</span>
-                <img class="article__image" src="f4733af4b67dfb91a9479f9d42dfdb62.png">
+                <h3 class="article__content-name">Фотография</h3>
+                <img class="article__image" alt="Фотография" src="img/image_07.png">
                 <button class="article__delete-icon"></button>
               </div>
               <div class="article__text-container">
@@ -108,6 +111,7 @@
               </div>
             </article>
           </div>
+        </div>
       </section>
     </main>
     <footer class="footer">
@@ -119,14 +123,16 @@
               <li class="footer__menu-item"><a href="/index" class="footer__link">Главная</a></li>
               <li class="footer__menu-item"><a href="/save-articles" class="footer__link">Яндекс.Практикум</a></li>
             </ul>
-            <a class="footer__link"><img class="footer__icon" src="45fc9be3ec228f171e175487491315bb.svg" alt="github icon"></a>
-            <a class="footer__link"><img class="footer__icon" src="400b31da08bea4d92e859c0373e85f8b.svg" alt="facebook icon"></a>
+            <div class="footer__icons-container">
+              <a class="footer__link" href="https://github.com" target="_blank"><img class="footer__icon" src="img/github.svg" alt="github icon"></a>
+              <a class="footer__link" href="https://facebook.com" target="_blank"><img class="footer__icon" src="img/facebook.svg" alt="facebook icon"></a>
+            </div>
           </div>
         </div>
       </div>
     </footer>
   </div>
-  <script src="main.94dc88835bb2426a298e.js"></script>
+  <script src="main.c15473adb15a729792bc.js"></script>
 </body>
 
 </html>
