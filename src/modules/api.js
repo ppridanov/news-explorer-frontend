@@ -4,21 +4,20 @@ class Api {
     this.headers = options.headers;
   }
   signin(emailValue, passwordValue) {
-    console.log(emailValue, passwordValue)
-    return fetch('http://localhost:3000/signin', {
-      method: 'POST',
-      headers: this.headers,
-      body: JSON.stringify({
-        email: emailValue,
-        password: passwordValue
+    try {
+      return fetch('http://localhost:3000/signin', {
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify({
+          email: emailValue,
+          password: passwordValue
+        })
       })
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })  }
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(res.status);
 }
 
 function serverUrl() {

@@ -1,10 +1,8 @@
-// console.log('Hello, World!')
-// //ВСЕ что тут сделано это на время верстки. В будующем это все я переделаю.
-import { Popup } from "./modules/popup";
-import "./style.css";
-import { connection } from "./modules/api";
-import { validator } from "./modules/validator";
+import './style.css';
+import EventListener from './js/components/EventListener';
+import MainApi from './js/api/MainApi';
+import Popup from './js/components/Popup';
+// import EventListener from './js/components/EventListener';
+new EventListener()._setEventListener();
 
-
-const popup = new Popup();
-
+const popup = new Popup('#signin-tpl');
