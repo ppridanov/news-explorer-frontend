@@ -1,4 +1,6 @@
 import MainApi from '../api/MainApi';
+// eslint-disable-next-line import/no-cycle
+import Popup from './Popup';
 import { EMAIL_REGEXP, NAME_REGEXP } from '../constans/constans';
 import {
   SERVER_BAD_REQUEST_ERROR,
@@ -11,9 +13,11 @@ import {
   INPUT_SMALL_NAME_ERROR,
   INPUT_SMALL_PASS_ERROR,
 } from '../constans/error-constans';
+import Header from './Header';
 
 const connect = new MainApi({
   url: 'http://localhost:3000',
+  token: localStorage.getItem('token'),
 });
 
 
@@ -23,7 +27,7 @@ export default class Validator {
     this._button = this._form.elements.button;
     this._inputs = Array.from(this._form).filter((item) => item.nodeName === 'INPUT');
     this._setEventListener(this._inputs, this._form);
-    // this._disableButton();
+    this._disableButton();
   }
 
   setServerError(res) {
@@ -46,7 +50,7 @@ export default class Validator {
       this._checkForm(inputs);
     }));
     form.addEventListener('submit', (event) => {
-      this.submitForm(event, form, inputs);
+      this._submitForm(event, form, inputs);
     });
   }
 
@@ -102,12 +106,13 @@ export default class Validator {
 
   activateError(element) {
     element.parentNode.classList.add('form__input-container_invalid');
-    // this.disableButton;
+    this._disableButton();
   }
 
   resetError(element) {
     element.parentNode.classList.remove('form__input-container_invalid');
-    // element.textContent = '';
+    // eslint-disable-next-line no-param-reassign
+    element.textContent = '';
   }
 
   _enableButton() {
@@ -131,11 +136,11 @@ export default class Validator {
       this._enableButton();
       return true;
     }
-    // this._disableButton();
+    this._disableButton();
     return false;
   }
 
-  submitForm(event, form, inputs) {
+  _submitForm(event, form, inputs) {
     event.preventDefault();
     this._checkForm(inputs);
     const formName = form.dataset.form;
@@ -143,6 +148,12 @@ export default class Validator {
     if (formName === 'login') {
       connect.signinUser(inputs[0].value, inputs[1].value)
         .then((res) => (res.ok ? res.json() : this.setServerError(res)))
+        .then((res) => {
+          localStorage.setItem('token', res.jwt);
+          new Popup('#signin-tpl').render();
+          new Header().clearContent();
+          new Header().render();
+        })
         .catch((error) => {
           if (error.message == 'Failed to fetch') {
             serverErrorSpan.textContent = SERVER_INTERNAL_ERROR;
@@ -153,6 +164,10 @@ export default class Validator {
     } else if (formName === 'signup') {
       connect.signupUser(inputs[0].value, inputs[1].value, inputs[2].value)
         .then((res) => this.setServerError(res))
+        .then((res) => {
+          new Popup('#signin-tpl').render();
+          new Popup('#thanks-tpl').open();
+        })
         .catch((error) => {
           if (error.message == 'Failed to fetch') {
             serverErrorSpan.textContent = SERVER_INTERNAL_ERROR;
@@ -163,3 +178,5 @@ export default class Validator {
     }
   }
 }
+
+export { connect };

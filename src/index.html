@@ -14,36 +14,14 @@
 <body>
   <div class="page">
     <header class="header header__bg-img">
-      <nav class="nav">
-        <a href="/" class="nav__logo">NewsExplorer</a>
-        <div class="nav__burger-button"></div>
-        <div class="nav__close-button"></div>
-        <ul class="nav__menu-items">
-          <li class="nav__menu-item"><a href="./index.html" class="nav__link nav__link_active">Главная</a></li>
-          <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button" data-target='login'>Авторизоваться</button>
-        </ul>
-      </nav>
-        <!-- <nav class="nav">
-          <a href="/" class="nav__logo">NewsExplorer</a>
-          <button class="nav__burger-button"></button>
-          <button class="nav__close-button"></button>
-          <ul class="nav__menu-items">
-            <li class="nav__menu-item"><a href="/" class="nav__link nav__link_active">Главная</a></li>
-            <li class="nav__menu-item"><a href="/save-articles.html" class="nav__link">Сохраненные статьи</a></li>
-            <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button">Авторизоваться</button>
-            <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button">Грета <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z" fill="#fff"/>
-              </svg></button></li>
-          </ul>
-        </nav> -->
-        <section class="search">
-          <h1 class="search__title">Что в мире творится?</h1>
-          <p class="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своем личном кабинете.</p>
-          <form class="search__form" name="search">
-            <input class="search__input search__input_name_article" name="searchinput" placeholder="Введите тему новости">
-            <button class="search__submit-button">Искать</button>
-          </form>
-        </section>
+      <section class="search">
+        <h1 class="search__title">Что в мире творится?</h1>
+        <p class="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своем личном кабинете.</p>
+        <form class="search__form" name="search">
+          <input class="search__input search__input_name_article" name="searchinput" placeholder="Введите тему новости">
+          <button class="search__submit-button">Искать</button>
+        </form>
+      </section>
     </header>
     <main class="main">
       <section class="articles">
@@ -201,6 +179,32 @@
       </div>
     </div>
   </template>
+  <template id="header-islogged-tpl">
+    <nav class="nav">
+      <a href="/" class="nav__logo">NewsExplorer</a>
+      <button class="nav__burger-button"></button>
+      <button class="nav__close-button"></button>
+      <ul class="nav__menu-items">
+        <li class="nav__menu-item"><a href="/" class="nav__link nav__link_active">Главная</a></li>
+        <li class="nav__menu-item"><a href="/savearticles" class="nav__link">Сохраненные статьи</a></li>
+        <li class="nav__menu-item nav__menu-item_login"><div class="nav__logout-container"><button class="nav__logout-button"></button><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z" fill="#fff"/>
+          </svg></div>
+        </li>
+      </ul>
+    </nav>
+  </template>
+  <template id="header-notlogged-tpl">
+    <nav class="nav">
+      <a href="/" class="nav__logo">NewsExplorer</a>
+      <div class="nav__burger-button"></div>
+      <div class="nav__close-button"></div>
+      <ul class="nav__menu-items">
+        <li class="nav__menu-item"><a href="./index.html" class="nav__link nav__link_active">Главная</a></li>
+        <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button" data-target='login'>Авторизоваться</button>
+      </ul>
+    </nav>
+</template>
   <script src="<%=htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 

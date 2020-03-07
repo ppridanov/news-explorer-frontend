@@ -58,8 +58,11 @@ export default class MainApi {
         authorization: this.token,
       },
     })
-      .then((res) => (res.ok ? this.returnRes(res) : Promise.reject()))
-      .catch((e) => console.log(e.message));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      });
   }
 
   deleteArticle(articeID) {
@@ -69,8 +72,11 @@ export default class MainApi {
         authorization: this.token,
       },
     })
-      .then((res) => (res.ok ? this.returnRes(res) : Promise.reject()))
-      .catch((e) => console.log(e.message));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      });
   }
 
   getUserInfo() {
@@ -79,7 +85,10 @@ export default class MainApi {
         authorization: this.token,
       },
     })
-      .then((res) => (res.ok ? this.returnRes(res) : Promise.reject()))
-      .catch((e) => console.log(e.message));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      });
   }
 }

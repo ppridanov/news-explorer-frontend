@@ -3,6 +3,7 @@
 @import url('./__burger-button/nav__burger-button.css');
 @import url('./__close-button/nav__close-button.css');
 @import url('./__burger-button/nav__burger-button_none.css');
+@import url('./__logout-container/nav__logout-container.css');
 
 .nav {
   height: 80px;

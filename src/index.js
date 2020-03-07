@@ -1,8 +1,13 @@
 import './style.css';
 import EventListener from './js/components/EventListener';
-import MainApi from './js/api/MainApi';
 import Popup from './js/components/Popup';
+import isLogged from './js/utils/scripts'
+import Validator from './js/components/Validator';
+import MainApi from './js/api/MainApi';
+import Header from './js/components/Header';
+
 // import EventListener from './js/components/EventListener';
 new EventListener()._setEventListener();
 
-const popup = new Popup('#signin-tpl');
+isLogged();
+new Header().render();

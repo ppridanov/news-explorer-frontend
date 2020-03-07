@@ -1,4 +1,5 @@
 import { ESCAPE_CODE } from '../constans/constans';
+// eslint-disable-next-line import/no-cycle
 import Validator from './Validator';
 
 export default class Popup {
@@ -42,7 +43,7 @@ export default class Popup {
     });
   }
 
-  _render() {
+  render() {
     this._container.removeChild(document.querySelector('.popup'));
   }
 
