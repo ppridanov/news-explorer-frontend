@@ -1,5 +1,6 @@
 import MainApi from '../api/MainApi';
 import NewsCard from './NewsCard';
+import NewsCardList from './NewsCardList';
 
 export default class Header {
   constructor() {
@@ -25,6 +26,9 @@ export default class Header {
       if (document.location.pathname === '/savearticles') document.location.href = '../';
       _template = document.querySelector('#header-notlogged-tpl');
       this._container.prepend(_template.content.cloneNode(true));
+      if (document.querySelector('.articles__results')) {
+        document.querySelector('.articles__results').remove();
+      }
     }
   }
 
@@ -33,7 +37,6 @@ export default class Header {
       localStorage.clear();
       this.clearContent();
       this.render();
-      window.location.reload();
     });
   }
 

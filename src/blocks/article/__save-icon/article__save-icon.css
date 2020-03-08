@@ -1,3 +1,5 @@
+
+
 .article__save-icon {
   position: absolute;
   right: 24px;
@@ -11,10 +13,6 @@
   background-color: #fff;
   border: none;
   cursor: pointer;
-}
-
-.article__save-icon_hover {
-  background-image: url('../../../img/save-icon_hover.svg');
 }
 
 .article__save-icon_active {

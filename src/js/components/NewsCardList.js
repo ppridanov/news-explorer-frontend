@@ -16,7 +16,6 @@ export default class NewsCardList {
     this._setHandlers();
   }
 
-
   _setHandlers() {
     this._form.addEventListener('submit', (e) => {
       this._value = this._input.value;
@@ -50,7 +49,6 @@ export default class NewsCardList {
           document.querySelector('.articles__next-button').setAttribute('style', 'display: none');
         }
         this._newsArray = this._newsArray.slice(3);
-        console.log(threeArticles);
         threeArticles.forEach((item) => {
           const articlesElement = new NewsCard().create({
             source: item.source.name,
@@ -71,13 +69,15 @@ export default class NewsCardList {
 
   moreCards() {
     const resultsCard = document.querySelector('.articles-container');
+    console.log(this._newsArray);
     const threeArticles = this._newsArray.slice(0, 3);
     this._newsArray = this._newsArray.slice(3);
-    if (threeArticles.length === 0) {
+    if (this._newsArray.length <= 3) {
       document.querySelector('.articles__next-button').setAttribute('style', 'display: none');
+      document.querySelector('.articles-container').setAttribute('style', 'margin-bottom: 86px');
     }
     threeArticles.forEach((item) => {
-      const articlesElement = new NewsCard({
+      const articlesElement = new NewsCard().create({
         source: item.source.name,
         title: item.title,
         date: item.publishedAt.slice(0, -10),
@@ -85,7 +85,7 @@ export default class NewsCardList {
         image: item.urlToImage,
         link: item.url,
         keyword: this._value,
-      }).create();
+      });
       resultsCard.appendChild(articlesElement);
     });
   }

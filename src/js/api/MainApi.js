@@ -49,7 +49,12 @@ export default class MainApi {
         authorization: this.token,
       },
     })
-      .then((res) => res.json());
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        Promise.reject();
+      });
   }
 
   getArticles() {
@@ -89,6 +94,7 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
+        Promise.reject();
       });
   }
 }

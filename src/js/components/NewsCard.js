@@ -1,8 +1,18 @@
+/* eslint-disable import/no-cycle */
 import { MONTH_NAME } from '../constans/constans';
+import MainApi from '../api/MainApi';
+
+const connection = new MainApi({
+  url: 'http://localhost:3000',
+  token: localStorage.getItem('token'),
+});
 
 export default class NewsCard {
-  constructor(container) {
-    this._container = container || '';
+  constructor() {
+    this._container = '';
+    if (document.location.pathname === '/savearticles') {
+      this._mainContainer = document.querySelector('.saved-articles__card-container');
+    }
   }
 
 
@@ -13,12 +23,17 @@ export default class NewsCard {
     const imgContainer = document.createElement('div');
     imgContainer.classList.add('article__image-container');
 
-    const img = document.createElement('img');
+    const img = document.createElement('div');
     img.classList.add('article__image');
-    img.setAttribute('src', `${data.image}`);
-    img.setAttribute('alt', `${data.title}`);
+    img.setAttribute('style', `background-image: url(${data.image})`);
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('article__delete-icon');
+    deleteButton.setAttribute('_id', data._id);
+    deleteButton.addEventListener('click', (e) => {
+      this._mainContainer.removeChild(e.target.closest('.article'));
+      connection.deleteArticle(deleteButton.getAttribute('_id'));
+      deleteButton.removeAttribute('_id');
+    });
     const deleteMsg = document.createElement('span');
     deleteMsg.classList.add('article__delete-msg');
     deleteMsg.textContent = 'Убрать из сохраненных';
@@ -28,14 +43,14 @@ export default class NewsCard {
     const saveButton = document.createElement('button');
     if (this.isLogin()) {
       saveButton.addEventListener('click', (e) => {
-        this.renderIcons(e);
+        this.renderIcons(data);
       });
     } else {
       saveButton.addEventListener('mouseover', (e) => {
-        this.renderIcons(e, notLoggedMsg);
+        this.renderIcons();
       });
       saveButton.addEventListener('mouseout', (e) => {
-        this.renderIcons(e, notLoggedMsg);
+        this.renderIcons();
       });
     }
     saveButton.classList.add('article__save-icon');
@@ -44,8 +59,6 @@ export default class NewsCard {
     contentName.textContent = data.keyword;
     if (document.location.pathname === '/savearticles') {
       imgContainer.append(img, deleteButton, deleteMsg, contentName);
-    } else if (this.isLogin()) {
-      imgContainer.append(img, saveButton);
     } else {
       imgContainer.append(img, saveButton, notLoggedMsg);
     }
@@ -69,7 +82,6 @@ export default class NewsCard {
     textContainer.append(titleText, dateText, descText, linkContainer);
 
     this._container.append(imgContainer, textContainer);
-    console.log(this._container);
     return this._container;
   }
 
@@ -88,14 +100,25 @@ export default class NewsCard {
     return `${day} ${month}, ${year}`;
   }
 
-  renderIcons() {
+  renderIcons(data) {
     const button = this._container.querySelector('.article__save-icon');
     const span = this._container.querySelector('.article__signin-msg');
     if (this.isLogin()) {
       if (button.classList.contains('article__save-icon_active')) {
         button.classList.remove('article__save-icon_active');
+        if (button.getAttribute('_id')) {
+          connection.deleteArticle(button.getAttribute('_id'))
+            .then(() => button.removeAttribute('_id'));
+        }
       } else {
         button.classList.add('article__save-icon_active');
+        connection.createArticle(data)
+          .then((data) => {
+            button.setAttribute('_id', `${data._id}`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     } else if (button.classList.contains('article__save-icon_hover')) {
       button.classList.remove('article__save-icon_hover');
