@@ -4,7 +4,7 @@ import MainApi from '../api/MainApi';
 import NewsCard from './NewsCard';
 
 const connect = new MainApi({
-  url: 'http://api.pridanov.site',
+  url: 'https://api.pridanov.site',
   token: localStorage.getItem('token'),
 });
 

@@ -9,7 +9,7 @@ import MainApi from '../../js/api/MainApi';
 const saveArticles = new SaveArticles();
 
 const connect = new MainApi({
-  url: 'http://api.pridanov.site',
+  url: 'https://api.pridanov.site',
   token: localStorage.getItem('token'),
 });
 
