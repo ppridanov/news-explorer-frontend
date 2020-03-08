@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-cycle
-import { connect } from './Validator';
+import MainApi from '../api/MainApi';
+import NewsCard from './NewsCard';
 
 export default class Header {
   constructor() {
@@ -12,13 +12,17 @@ export default class Header {
       _template = document.querySelector('#header-islogged-tpl');
       this._container.prepend(_template.content.cloneNode(true));
       const logOutButton = this._container.querySelector('.nav__logout-button');
-      connect.getUserInfo()
+      new MainApi({
+        url: 'http://localhost:3000',
+        token: localStorage.getItem('token'),
+      }).getUserInfo()
         .then((res) => {
           logOutButton.textContent = res.name;
         })
         .catch((err) => console.log(err));
       this._setEventListener();
     } else {
+      if (document.location.pathname === '/savearticles') document.location.href = '../';
       _template = document.querySelector('#header-notlogged-tpl');
       this._container.prepend(_template.content.cloneNode(true));
     }
@@ -26,20 +30,11 @@ export default class Header {
 
   _setEventListener() {
     this._container.querySelector('.nav__logout-button').addEventListener('click', (e) => {
-      if (this._logOut()) {
-        localStorage.clear();
-        this.clearContent();
-        this.render();
-      }
-    });
-  }
-
-  _logOut() {
-    if (localStorage != undefined && localStorage.getItem('token')) {
       localStorage.clear();
-      return true;
-    }
-    return false;
+      this.clearContent();
+      this.render();
+      window.location.reload();
+    });
   }
 
   clearContent() {

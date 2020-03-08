@@ -6,3 +6,7 @@
   border-radius: 30px;
   padding: 0 10px;
 }
+
+.nav__logout-container_black-theme {
+  border: 1px solid #000;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 import MainApi from '../api/MainApi';
 // eslint-disable-next-line import/no-cycle
 import Popup from './Popup';
@@ -27,6 +28,7 @@ export default class Validator {
     this._button = this._form.elements.button;
     this._inputs = Array.from(this._form).filter((item) => item.nodeName === 'INPUT');
     this._setEventListener(this._inputs, this._form);
+    console.log(this._inputs);
     this._disableButton();
   }
 
@@ -178,5 +180,3 @@ export default class Validator {
     }
   }
 }
-
-export { connect };

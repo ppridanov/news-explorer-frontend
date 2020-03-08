@@ -1,13 +1,16 @@
+/* eslint-disable no-new */
 import './style.css';
 import EventListener from './js/components/EventListener';
 import Popup from './js/components/Popup';
-import isLogged from './js/utils/scripts'
 import Validator from './js/components/Validator';
 import MainApi from './js/api/MainApi';
 import Header from './js/components/Header';
+import NewsApi from './js/api/NewsApi';
+import NewsCard from './js/components/NewsCard';
+import NewsCardList from './js/components/NewsCardList';
 
-// import EventListener from './js/components/EventListener';
 new EventListener()._setEventListener();
-
-isLogged();
 new Header().render();
+new Validator('search');
+
+new NewsCardList();

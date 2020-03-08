@@ -17,74 +17,17 @@
       <section class="search">
         <h1 class="search__title">Что в мире творится?</h1>
         <p class="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своем личном кабинете.</p>
-        <form class="search__form" name="search">
-          <input class="search__input search__input_name_article" name="searchinput" placeholder="Введите тему новости">
-          <button class="search__submit-button">Искать</button>
+        <form class="search__form" id="search" name="search" novalidate min data-form="search">
+          <input class="search__input search__input_name_article" required type="text" name="searchinput" placeholder="Введите тему новости">
+          <span class="error-message error__searchinput"></span>
+          <button class="search__submit-button" name="button" type='submit'>Искать</button>
         </form>
       </section>
     </header>
     <main class="main">
       <section class="articles">
         <div class="container">
-          <div class="articles__results">
-            <!-- Здесь загружается если ничего не найдено -->
-            <!-- <div class="articles__not-found-container">
-              <img class="articles__not-found-image" src="<%=require('./img/not-found_v1.svg') %>">
-              <h3 class="articles__not-found-title">Ничего не найдено</h3>
-              <p class="articles__not-found-text">К сожалению по вашему запросу ничего не найдено.</p>
-            </div> -->
-            <!-- Конец блока -->
-
-            <!-- Здесь загружается прелоадер -->
-            <!-- <div class="articles__searching">
-              <i class="circle-preloader"></i>
-              <span class="circle-preloader__text">Идет поиск новостей...</span>
-            </div> -->
-            <!-- Конец блока прелоадера -->
-
-            <!-- Здесь основной блок с карточками новостей -->
-            <h3 class="title articles__title">Результаты поиска</h3>
-            <div class="articles-container">
-              <article class="article">
-                <div class="article__image-container">
-                  <img class="article__image" src="<%=require('./img/image_08.png') %>" alt="News Image">
-                  <button class="article__save-icon"></button>
-                </div>
-                <div class="article__text-container">
-                  <p class="article__date">2 августа, 2019</p>
-                  <h3 class="article__name">Национальное достояние – парки</h3>
-                  <p class="article__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
-                  <a class="article__link" href="https://https://lenta.ru/" target="_blank">Лента.ру</a>
-                </div>
-              </article>
-              <article class="article">
-                <div class="article__image-container">
-                  <img class="article__image" src="<%=require('./img/image_04.png') %>" alt="News Image">
-                  <button class="article__save-icon"></button>
-                </div>
-                <div class="article__text-container">
-                  <p class="article__date">2 августа, 2019</p>
-                  <h3 class="article__name">Лесные огоньки: история одной фотографии</h3>
-                  <p class="article__description">Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного
-                    из местных чудес природы.</p>
-                  <a class="article__link" href="https://meduza.io" target="_blank">Медуза</a>
-                </div>
-              </article>
-              <article class="article">
-                <div class="article__image-container">
-                  <img class="article__image" src="<%=require('./img/image_07.png') %>" alt="News Image">
-                  <button class="article__save-icon"></button>
-                </div>
-                <div class="article__text-container">
-                  <p class="article__date">2 августа, 2019</p>
-                  <h3 class="article__name">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
-                  <p class="article__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
-                  <a class="article__link" href="https://ria.ru" target="_blank">Риа</a>
-                </div>
-              </article>
-            </div>
-            <button class="articles__next-button">Показать еще</button>
-            <!-- Конец блока результатов -->
+          <div class="articles__results-container">
           </div>
         </div>
       </section>
@@ -119,6 +62,8 @@
       </div>
     </footer>
   </div>
+
+  <!-- Попап регистрации -->
   <template id="signup-tpl">
     <div class="popup popup__signup" id="signup">
       <div class="popup__content">
@@ -147,6 +92,8 @@
       </div>
     </div>
   </template>
+
+  <!-- Попап входа -->
   <template id="signin-tpl">
     <div class="popup popup__login" id="login">
       <div class="popup__content">
@@ -170,6 +117,8 @@
       </div>
     </div>
   </template>
+
+  <!-- Попап с сообщением об успешной регистрации -->
   <template id="thanks-tpl">
     <div class="popup popup__success" id="success">
       <div class="popup__content">
@@ -179,6 +128,8 @@
       </div>
     </div>
   </template>
+
+  <!-- Шапка заллогированного пользователя -->
   <template id="header-islogged-tpl">
     <nav class="nav">
       <a href="/" class="nav__logo">NewsExplorer</a>
@@ -194,6 +145,8 @@
       </ul>
     </nav>
   </template>
+
+  <!-- Шапка для незалогированного пользователя -->
   <template id="header-notlogged-tpl">
     <nav class="nav">
       <a href="/" class="nav__logo">NewsExplorer</a>
@@ -204,7 +157,38 @@
         <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button" data-target='login'>Авторизоваться</button>
       </ul>
     </nav>
-</template>
+  </template>
+
+  <!-- Здесь загружается прелоадер -->
+  <template id="results-is-loading">
+    <div class="articles__results">
+      <div class="articles__searching">
+        <i class="circle-preloader"></i>
+        <span class="circle-preloader__text">Идет поиск новостей...</span>
+      </div>
+    </div>
+  </template>
+
+  <!-- Здесь загружается если ничего не найдено -->
+  <template id="results-not-found">
+    <div class="articles__results">
+      <div class="articles__not-found-container">
+        <img class="articles__not-found-image" src="<%=require('./img/not-found_v1.svg') %>">
+        <h3 class="articles__not-found-title">Ничего не найдено</h3>
+        <p class="articles__not-found-text">К сожалению по вашему запросу ничего не найдено.</p>
+      </div>
+    </div>
+  </template>
+
+  <!-- Здесь выводятся результаты -->
+  <template id="results-found">
+    <div class="articles__results">
+      <h3 class="title articles__title">Результаты поиска</h3>
+      <div class="articles-container">
+      </div>
+      <button class="articles__next-button">Показать еще</button>
+    </div>
+  </template>
   <script src="<%=htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 
