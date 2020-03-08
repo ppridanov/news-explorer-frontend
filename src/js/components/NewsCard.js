@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { MONTH_NAME } from '../constans/constans';
 import MainApi from '../api/MainApi';
+import SaveArticles from './SaveArtciles';
 
 const connection = new MainApi({
   url: 'http://api.pridanov.site',
@@ -19,6 +20,7 @@ export default class NewsCard {
   create(data) {
     this._container = document.createElement('article');
     this._container.classList.add('article');
+    this._container.setAttribute('index', data.indexNum);
 
     const imgContainer = document.createElement('div');
     imgContainer.classList.add('article__image-container');

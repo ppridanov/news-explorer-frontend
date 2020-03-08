@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-return-assign */
 import MainApi from '../api/MainApi';
 import NewsCard from './NewsCard';
@@ -16,7 +17,9 @@ export default class SaveArticles {
     this._newsArray = [];
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('article__delete-icon')) {
-        this._keywordArray.pop();
+        const articleCard = e.target.parentNode.parentNode;
+        const articleIndex = articleCard.getAttribute('index');
+        this._keywordArray.splice(articleIndex, 1);
         this.renderKeywords();
       }
     });
@@ -28,7 +31,7 @@ export default class SaveArticles {
       .then((data) => {
         console.log(data);
         this._newsArray = data;
-        data.forEach((item) => {
+        data.forEach((item, index) => {
           const articlesElement = new NewsCard().create({
             source: item.source,
             title: item.title,
@@ -38,6 +41,7 @@ export default class SaveArticles {
             link: item.url,
             keyword: item.keyword,
             _id: item._id,
+            indexNum: index,
           });
           this._keywordArray.push(item.keyword);
           this._container.appendChild(articlesElement);
@@ -47,6 +51,13 @@ export default class SaveArticles {
   }
 
   renderKeywords() {
+    const result = {};
+    this._keywordArray.forEach((item) => {
+      result[item] = result[item] + 1 || 1;
+    });
+    const keywordSorted = Object.keys(result).sort((a, b) => result[b] - result[a]);
+    console.log(result);
+    console.log(keywordSorted);
     let saveArticlesText = '';
     if (this._keywordArray.length == 0) {
       saveArticlesText = 'сохраненных статей';
@@ -60,13 +71,13 @@ export default class SaveArticles {
     const newKeywordsArray = Array.from(new Set(this._keywordArray));
     let keyWordsText = '';
     if (newKeywordsArray.length > 2) {
-      keyWordsText = `${newKeywordsArray[0]}, ${newKeywordsArray[1]} и ${newKeywordsArray.slice(0, -2).length} других.`;
+      keyWordsText = `${keywordSorted[0]}, ${keywordSorted[1]} и ${keywordSorted.slice(0, -2).length} других.`;
     } else if (newKeywordsArray.length == 2) {
-      keyWordsText = `${newKeywordsArray[0]} и ${newKeywordsArray[1]}`;
+      keyWordsText = `${keywordSorted[0]} и ${keywordSorted[1]}`;
     } else if (newKeywordsArray.length === 0) {
       keyWordsText = 'Ключевых слов нет';
     } else {
-      keyWordsText = `${newKeywordsArray[0]}`;
+      keyWordsText = `${keywordSorted[0]}`;
     }
     connect.getUserInfo()
       .then((data) => {
