@@ -14,3 +14,9 @@ new Header().render();
 new Validator('search');
 
 new NewsCardList();
+
+function checkWidth() {
+  if (document.documentElement.clientWidth < 768) {
+    document.querySelector('.nav__burger-button').setAttribute('style', 'display: flex');
+  }
+}

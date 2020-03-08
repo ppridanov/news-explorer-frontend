@@ -22,10 +22,12 @@ export default class Header {
         })
         .catch((err) => console.log(err));
       this._setEventListener();
+      this._mobileRender();
     } else {
       if (document.location.pathname === '/savearticles') document.location.href = '../';
       _template = document.querySelector('#header-notlogged-tpl');
       this._container.prepend(_template.content.cloneNode(true));
+      this._mobileRender();
       if (document.querySelector('.articles__results')) {
         document.querySelector('.articles__results').remove();
       }
@@ -42,5 +44,31 @@ export default class Header {
 
   clearContent() {
     this._element = this._container.querySelector('.nav').remove();
+    this._container.querySelector('.overlay').remove();
+    this._container.querySelector('.header__overlay').remove();
+  }
+
+  _mobileRender() {
+    const overlay = document.querySelector('.overlay');
+    const burgerButton = document.querySelector('.nav__burger-button');
+    const closeButton = document.querySelector('.nav__close-button');
+    const headerOverlay = document.querySelector('.header__overlay');
+    const menuItems = document.querySelector('.nav__menu-items');
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('nav__burger-button')) {
+        overlay.setAttribute('style', 'display: flex');
+        headerOverlay.setAttribute('style', 'display: flex');
+        menuItems.setAttribute('style', 'display: flex');
+        burgerButton.setAttribute('style', 'display: none');
+        closeButton.setAttribute('style', 'display: flex');
+      }
+      if (e.target.classList.contains('overlay') || e.target.classList.contains('nav__close-button')) {
+        overlay.removeAttribute('style');
+        headerOverlay.removeAttribute('style');
+        menuItems.removeAttribute('style');
+        burgerButton.removeAttribute('style');
+        closeButton.removeAttribute('style');
+      }
+    });
   }
 }
