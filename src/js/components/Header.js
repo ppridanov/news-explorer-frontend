@@ -14,7 +14,7 @@ export default class Header {
       this._container.prepend(_template.content.cloneNode(true));
       const logOutButton = this._container.querySelector('.nav__logout-button');
       new MainApi({
-        url: 'http://localhost:3000',
+        url: 'http://api.pridanov.site',
         token: localStorage.getItem('token'),
       }).getUserInfo()
         .then((res) => {

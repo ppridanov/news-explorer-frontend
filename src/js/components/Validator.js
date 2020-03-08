@@ -17,7 +17,7 @@ import {
 import Header from './Header';
 
 const connect = new MainApi({
-  url: 'http://localhost:3000',
+  url: 'http://api.pridanov.site',
   token: localStorage.getItem('token'),
 });
 

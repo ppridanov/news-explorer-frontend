@@ -3,7 +3,7 @@ import { MONTH_NAME } from '../constans/constans';
 import MainApi from '../api/MainApi';
 
 const connection = new MainApi({
-  url: 'http://localhost:3000',
+  url: 'http://api.pridanov.site',
   token: localStorage.getItem('token'),
 });
 
@@ -29,14 +29,20 @@ export default class NewsCard {
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('article__delete-icon');
     deleteButton.setAttribute('_id', data._id);
+    const deleteMsg = document.createElement('span');
+    deleteMsg.classList.add('article__delete-msg');
+    deleteMsg.textContent = 'Убрать из сохраненных';
     deleteButton.addEventListener('click', (e) => {
       this._mainContainer.removeChild(e.target.closest('.article'));
       connection.deleteArticle(deleteButton.getAttribute('_id'));
       deleteButton.removeAttribute('_id');
     });
-    const deleteMsg = document.createElement('span');
-    deleteMsg.classList.add('article__delete-msg');
-    deleteMsg.textContent = 'Убрать из сохраненных';
+    deleteButton.addEventListener('mouseover', (e) => {
+      deleteMsg.setAttribute('style', 'display: block');
+    });
+    deleteButton.addEventListener('mouseout', (e) => {
+      deleteMsg.removeAttribute('style');
+    });
     const notLoggedMsg = document.createElement('span');
     notLoggedMsg.classList.add('article__signin-msg');
     notLoggedMsg.textContent = 'Войдите, чтобы сохранять статьи';
