@@ -36,19 +36,19 @@ export default class SaveArticles {
     connection.getArticles()
       .then((articlesArray) => {
         this._newsArray = articlesArray;
-        articlesArray.forEach((card, index) => {
+        articlesArray.forEach((article, index) => {
           const articlesElement = new NewsCard().create({
-            source: card.source,
-            title: card.title,
-            date: card.date,
-            text: card.text,
-            image: card.image,
-            link: card.link,
-            keyword: card.keyword,
-            _id: card._id,
+            source: article.source,
+            title: article.title,
+            date: article.date,
+            text: article.text,
+            image: article.image,
+            link: article.link,
+            keyword: article.keyword,
+            _id: article._id,
             indexNum: index,
           });
-          this._keywordArray.push(card.keyword);
+          this._keywordArray.push(article.keyword);
           this._container.appendChild(articlesElement);
         });
         this.renderKeywords();

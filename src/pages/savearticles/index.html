@@ -69,6 +69,20 @@
       </ul>
     </nav>
   </template>
+    <!-- Шапка для незалогированного пользователя -->
+    <template id="header-notlogged-tpl">
+      <div class="overlay"></div>
+      <div class="header__overlay"></div>
+      <nav class="nav">
+        <a href="/" class="nav__logo">NewsExplorer</a>
+        <div class="nav__burger-button"></div>
+        <div class="nav__close-button"></div>
+        <ul class="nav__menu-items">
+          <li class="nav__menu-item"><a href="./index.html" class="nav__link nav__link_active">Главная</a></li>
+          <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button" data-target='login'>Авторизоваться</button>
+        </ul>
+      </nav>
+    </template>
   <script src="<%= htmlWebpackPlugin.files.chunks.savearticles.entry %>"></script>
 </body>
 

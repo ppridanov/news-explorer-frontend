@@ -5,8 +5,16 @@ export default class Header {
     this._container = document.querySelector('.header');
   }
 
+  isLogin() {
+    if (localStorage && localStorage.getItem('token')) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     let _template = '';
+    if (!this.isLogin() && document.location.pathname === '/savearticles') document.location.href = '../';
     if (localStorage != undefined && localStorage.getItem('token')) {
       _template = document.querySelector('#header-islogged-tpl');
       this._container.prepend(_template.content.cloneNode(true));
@@ -22,7 +30,6 @@ export default class Header {
       this._setEventListener();
       this._mobileRender();
     } else {
-      if (document.location.pathname === '/savearticles') document.location.href = '../';
       _template = document.querySelector('#header-notlogged-tpl');
       this._container.prepend(_template.content.cloneNode(true));
       this._mobileRender();
