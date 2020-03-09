@@ -17,13 +17,19 @@ export default class SaveArticles {
     this._newsArray = [];
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('article__delete-icon')) {
-        const articleCard = e.target.parentNode.parentNode;
-        const articleIndex = articleCard.getAttribute('index');
-        this._keywordArray.splice(articleIndex, 1);
-        this.renderKeywords();
+        const deleteButton = e.target;
+        connection.deleteArticle(deleteButton.getAttribute('_id'))
+          .then(() => {
+            this._container.removeChild(e.target.closest('.article'));
+            deleteButton.removeAttribute('_id');
+            const articleCard = e.target.parentNode.parentNode;
+            const articleIndex = articleCard.getAttribute('index');
+            this._keywordArray.splice(articleIndex, 1);
+            this.renderKeywords();
+          })
+          .catch((err) => console.log(err));
       }
     });
-    console.log(this._container);
   }
 
   render() {
@@ -37,7 +43,7 @@ export default class SaveArticles {
             date: card.date,
             text: card.text,
             image: card.image,
-            link: card.url,
+            link: card.link,
             keyword: card.keyword,
             _id: card._id,
             indexNum: index,
@@ -56,8 +62,6 @@ export default class SaveArticles {
       result[item] = result[item] + 1 || 1;
     });
     const keywordSorted = Object.keys(result).sort((a, b) => result[b] - result[a]);
-    console.log(result);
-    console.log(keywordSorted);
     let saveArticlesText = '';
     if (this._keywordArray.length == 0) {
       saveArticlesText = 'сохраненных статей';
@@ -84,8 +88,6 @@ export default class SaveArticles {
         this._mainTitle.textContent = `${data.name}, у Вас ${this._keywordArray.length} ${saveArticlesText}`;
         this._keywordText.textContent = keyWordsText;
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }
 }

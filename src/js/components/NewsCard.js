@@ -34,11 +34,6 @@ export default class NewsCard {
     const deleteMsg = document.createElement('span');
     deleteMsg.classList.add('article__delete-msg');
     deleteMsg.textContent = 'Убрать из сохраненных';
-    deleteButton.addEventListener('click', (e) => {
-      this._mainContainer.removeChild(e.target.closest('.article'));
-      connection.deleteArticle(deleteButton.getAttribute('_id'));
-      deleteButton.removeAttribute('_id');
-    });
     deleteButton.addEventListener('mouseover', (e) => {
       deleteMsg.setAttribute('style', 'display: block');
     });

@@ -62,9 +62,7 @@ export default class NewsCardList {
           resultsCard.appendChild(articlesElement);
         });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }
 
   moreCards() {

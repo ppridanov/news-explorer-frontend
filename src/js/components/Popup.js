@@ -1,7 +1,6 @@
 import { ESCAPE_CODE } from '../constans/constans';
 // eslint-disable-next-line import/no-cycle
 import Validator from './Validator';
-import Header from './Header';
 
 export default class Popup {
   constructor(selector) {

@@ -9,5 +9,10 @@
     width: 358px;
     height: 65px;
     margin-top: 8px;
+}
 
+@media screen and (max-width: 600px) {
+  .form__button.form__button_save {
+    width: 100%;
+  }
 }

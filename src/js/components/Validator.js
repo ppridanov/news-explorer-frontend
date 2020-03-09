@@ -164,8 +164,8 @@ export default class Validator {
         });
     } else if (formName === 'signup') {
       connection.signupUser(inputs[0].value, inputs[1].value, inputs[2].value)
-        .then((res) => this.setServerError(res))
-        .then((res) => {
+        .then((res) => (res.ok ? res.json() : this.setServerError(res)))
+        .then(() => {
           new Popup('#signin-tpl').render();
           new Popup('#thanks-tpl').open();
         })

@@ -28,8 +28,7 @@ export default class MainApi {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => res.json());
+    });
   }
 
   createArticle(data) {
@@ -67,6 +66,7 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
+        Promise.reject();
       });
   }
 
@@ -81,6 +81,7 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
+        Promise.reject();
       });
   }
 
