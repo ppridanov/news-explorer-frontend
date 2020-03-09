@@ -3,7 +3,7 @@
 import MainApi from '../api/MainApi';
 import NewsCard from './NewsCard';
 
-const connect = new MainApi({
+const connection = new MainApi({
   url: 'https://api.pridanov.site',
   token: localStorage.getItem('token'),
 });
@@ -27,27 +27,27 @@ export default class SaveArticles {
   }
 
   render() {
-    connect.getArticles()
-      .then((data) => {
-        console.log(data);
-        this._newsArray = data;
-        data.forEach((item, index) => {
+    connection.getArticles()
+      .then((articlesArray) => {
+        this._newsArray = articlesArray;
+        articlesArray.forEach((card, index) => {
           const articlesElement = new NewsCard().create({
-            source: item.source,
-            title: item.title,
-            date: item.date,
-            text: item.text,
-            image: item.image,
-            link: item.url,
-            keyword: item.keyword,
-            _id: item._id,
+            source: card.source,
+            title: card.title,
+            date: card.date,
+            text: card.text,
+            image: card.image,
+            link: card.url,
+            keyword: card.keyword,
+            _id: card._id,
             indexNum: index,
           });
-          this._keywordArray.push(item.keyword);
+          this._keywordArray.push(card.keyword);
           this._container.appendChild(articlesElement);
         });
         this.renderKeywords();
-      });
+      })
+      .catch((err) => console.log(err));
   }
 
   renderKeywords() {
@@ -79,7 +79,7 @@ export default class SaveArticles {
     } else {
       keyWordsText = `${keywordSorted[0]}`;
     }
-    connect.getUserInfo()
+    connection.getUserInfo()
       .then((data) => {
         this._mainTitle.textContent = `${data.name}, у Вас ${this._keywordArray.length} ${saveArticlesText}`;
         this._keywordText.textContent = keyWordsText;

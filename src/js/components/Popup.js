@@ -31,7 +31,6 @@ export default class Popup {
   close() {
     this._element.classList.remove('popup_is-opened');
     this.clearContent();
-    new Header().clearMobileMenu();
   }
 
   _setEventListeners() {

@@ -69,7 +69,6 @@ export default class NewsCardList {
 
   moreCards() {
     const resultsCard = document.querySelector('.articles-container');
-    console.log(this._newsArray);
     const threeArticles = this._newsArray.slice(0, 3);
     this._newsArray = this._newsArray.slice(3);
     if (this._newsArray.length <= 3) {

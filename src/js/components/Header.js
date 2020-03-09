@@ -1,6 +1,4 @@
 import MainApi from '../api/MainApi';
-import NewsCard from './NewsCard';
-import NewsCardList from './NewsCardList';
 
 export default class Header {
   constructor() {

@@ -16,7 +16,7 @@ import {
 } from '../constans/error-constans';
 import Header from './Header';
 
-const connect = new MainApi({
+const connection = new MainApi({
   url: 'https://api.pridanov.site',
   token: localStorage.getItem('token'),
 });
@@ -147,7 +147,7 @@ export default class Validator {
     const formName = form.dataset.form;
     const serverErrorSpan = form.querySelector('.error__server-error');
     if (formName === 'login') {
-      connect.signinUser(inputs[0].value, inputs[1].value)
+      connection.signinUser(inputs[0].value, inputs[1].value)
         .then((res) => (res.ok ? res.json() : this.setServerError(res)))
         .then((res) => {
           localStorage.setItem('token', res.jwt);
@@ -163,7 +163,7 @@ export default class Validator {
           serverErrorSpan.textContent = error.message;
         });
     } else if (formName === 'signup') {
-      connect.signupUser(inputs[0].value, inputs[1].value, inputs[2].value)
+      connection.signupUser(inputs[0].value, inputs[1].value, inputs[2].value)
         .then((res) => this.setServerError(res))
         .then((res) => {
           new Popup('#signin-tpl').render();

@@ -113,20 +113,21 @@ export default class NewsCard {
     const span = this._container.querySelector('.article__signin-msg');
     if (this.isLogin()) {
       if (button.classList.contains('article__save-icon_active')) {
-        button.classList.remove('article__save-icon_active');
         if (button.getAttribute('_id')) {
           connection.deleteArticle(button.getAttribute('_id'))
-            .then(() => button.removeAttribute('_id'));
+            .then(() => {
+              button.removeAttribute('_id');
+              button.classList.remove('article__save-icon_active');
+            })
+            .catch((err) => console.log(err));
         }
       } else {
-        button.classList.add('article__save-icon_active');
         connection.createArticle(data)
           .then((data) => {
             button.setAttribute('_id', `${data._id}`);
+            button.classList.add('article__save-icon_active');
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => console.log(err));
       }
     } else if (button.classList.contains('article__save-icon_hover')) {
       button.classList.remove('article__save-icon_hover');
@@ -135,8 +136,5 @@ export default class NewsCard {
       button.classList.add('article__save-icon_hover');
       span.setAttribute('style', 'display: block');
     }
-  }
-
-  save(e) {
   }
 }
