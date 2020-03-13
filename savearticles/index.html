@@ -8,7 +8,7 @@
   <meta name="description" content="This project for interest news search">
   <meta name="author" content="Petr Pridanov">
   <meta name="keywords" content="Поиск новостей, новости, новости сейчас">
-  <link rel="stylesheet" href="../css/savearticles.edf53c1ff63a9a498328.css">
+  <link rel="stylesheet" href="../css/savearticles.9a452cf83650a6fcc231.css">
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
 </head>
 <body>
@@ -53,6 +53,8 @@
 
   <!-- Шапка заллогированного пользователя -->
   <template id="header-islogged-tpl">
+    <div class="overlay"></div>
+    <div class="header__overlay header__overlay_black-theme"></div>
     <nav class="nav">
       <a href="/" class="nav__logo nav__logo_black-theme">NewsExplorer</a>
       <button class="nav__burger-button nav__burger-button_black-theme"></button>
@@ -67,7 +69,21 @@
       </ul>
     </nav>
   </template>
-  <script src="../savearticles/savearticles.edf53c1ff63a9a498328.js"></script>
+    <!-- Шапка для незалогированного пользователя -->
+    <template id="header-notlogged-tpl">
+      <div class="overlay"></div>
+      <div class="header__overlay"></div>
+      <nav class="nav">
+        <a href="/" class="nav__logo">NewsExplorer</a>
+        <div class="nav__burger-button"></div>
+        <div class="nav__close-button"></div>
+        <ul class="nav__menu-items">
+          <li class="nav__menu-item"><a href="./index.html" class="nav__link nav__link_active">Главная</a></li>
+          <li class="nav__menu-item nav__menu-item_login"><button class="nav__login-button" data-target='login'>Авторизоваться</button>
+        </ul>
+      </nav>
+    </template>
+  <script src="../savearticles/savearticles.9a452cf83650a6fcc231.js"></script>
 </body>
 
 </html>
