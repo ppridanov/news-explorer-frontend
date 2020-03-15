@@ -2,10 +2,6 @@ export default class MainApi {
   constructor(options) {
     this.url = options.SERVER_URL;
     this.token = options.TOKEN;
-    this.headers = {
-      'Content-Type': 'application/json',
-      authorization: this.token,
-    }
   }
 
   signinUser(emailValue, passwordValue) {
@@ -52,8 +48,7 @@ export default class MainApi {
         authorization: this.token,
       },
     })
-    .then((res) => this._checkStatus(res));
-  });
+      .then((res) => this._checkStatus(res));
   }
 
   getArticles() {
@@ -62,7 +57,7 @@ export default class MainApi {
         authorization: this.token,
       },
     })
-    .then((res) => this._checkStatus(res));
+      .then((res) => this._checkStatus(res));
   }
 
   deleteArticle(articeID) {
@@ -72,7 +67,7 @@ export default class MainApi {
         authorization: this.token,
       },
     })
-    .then((res) => this._checkStatus(res));
+      .then((res) => this._checkStatus(res));
   }
 
   getUserInfo() {
