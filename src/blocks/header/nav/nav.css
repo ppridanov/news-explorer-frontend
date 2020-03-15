@@ -9,7 +9,7 @@
   height: 80px;
   display: flex;
   justify-content: space-between;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Times New Roman';
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   padding-right: 106px;
   padding-left: 102px;

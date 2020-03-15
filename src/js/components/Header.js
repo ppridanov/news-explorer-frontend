@@ -34,7 +34,7 @@ export default class Header {
   }
 
   _setEventListener() {
-    this._container.querySelector('.nav__logout-button').addEventListener('click', (e) => {
+    this._container.querySelector('.nav__logout-container').addEventListener('click', (e) => {
       localStorage.clear();
       this.clearContent();
       this.render();
