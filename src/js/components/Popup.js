@@ -1,13 +1,13 @@
 import { ESCAPE_CODE } from '../constans/constans';
-// eslint-disable-next-line import/no-cycle
-import Validator from './Validator';
 
 export default class Popup {
-  constructor(selector) {
+  constructor(selector, classes) {
     this._container = document.body.querySelector('.page');
     this._template = document.querySelector(selector).content.querySelector('.popup');
     this._element = this._template.cloneNode(true);
     this._handleEscClose = this._handleEscClose.bind(this);
+    this.validator = (...args) => new classes.Validator(...args);
+    this.classes = classes;
   }
 
   setContent() {
@@ -24,7 +24,7 @@ export default class Popup {
     this.setContent();
     this._element.classList.add('popup_is-opened');
     this._setEventListeners();
-    const validator = new Validator(this._element.id);
+    this.validator(this._element.id, this.classes);
   }
 
   close() {

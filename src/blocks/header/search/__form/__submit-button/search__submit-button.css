@@ -1,5 +1,5 @@
 .search__submit-button {
-  height: 64px;
+  height: 62px;
   width: 170px;
   position: absolute;
   right: 0;
@@ -15,10 +15,12 @@
   color: #FFFFFF;
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
   outline: none;
+  transition: ease-out .3s;
 }
 
 .search__submit-button:hover {
   background: #347EFF;
+  transition: ease-in .3s;
 }
 
 .search__submit-button:active {

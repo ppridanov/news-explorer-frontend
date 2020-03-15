@@ -9,8 +9,18 @@ import NewsApi from './js/api/NewsApi';
 import NewsCard from './js/components/NewsCard';
 import NewsCardList from './js/components/NewsCardList';
 
-new EventListener()._setEventListener();
-new Header().render();
-new Validator('search');
+const classes = {
+  EventListener,
+  Popup,
+  Validator,
+  MainApi,
+  Header,
+  NewsApi,
+  NewsCard,
+  NewsCardList,
+};
 
-new NewsCardList();
+new EventListener(classes);
+new Header(classes).render();
+new Validator('search', classes);
+new NewsCardList(classes);

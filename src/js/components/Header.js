@@ -1,28 +1,23 @@
-import MainApi from '../api/MainApi';
+import {
+  SERVER_URL,
+  TEMPLATE_IS_LOGGED,
+  TEMPLATE_NOT_LOGGED,
+  SAVE_ARTICLES_REGEXP,
+} from '../constans/constans';
+import { isLogin } from '../utils/scripts';
 
 export default class Header {
-  constructor() {
+  constructor(classes) {
     this._container = document.querySelector('.header');
-  }
-
-  isLogin() {
-    if (localStorage && localStorage.getItem('token')) {
-      return true;
-    }
-    return false;
+    this.connection = (...args) => new classes.MainApi(...args);
   }
 
   render() {
-    let _template = '';
-    if (!this.isLogin() && document.location.pathname === '/savearticles') document.location.href = '../';
+    if (!isLogin() && SAVE_ARTICLES_REGEXP.test(document.location.pathname)) document.location.href = '../';
     if (localStorage != undefined && localStorage.getItem('token')) {
-      _template = document.querySelector('#header-islogged-tpl');
-      this._container.prepend(_template.content.cloneNode(true));
+      this._container.prepend(TEMPLATE_IS_LOGGED.content.cloneNode(true));
       const logOutButton = this._container.querySelector('.nav__logout-button');
-      new MainApi({
-        url: 'https://api.pridanov.site',
-        token: localStorage.getItem('token'),
-      }).getUserInfo()
+      this.connection({ SERVER_URL, TOKEN: localStorage.getItem('token') }).getUserInfo()
         .then((res) => {
           logOutButton.textContent = res.name;
         })
@@ -30,8 +25,7 @@ export default class Header {
       this._setEventListener();
       this._mobileRender();
     } else {
-      _template = document.querySelector('#header-notlogged-tpl');
-      this._container.prepend(_template.content.cloneNode(true));
+      this._container.prepend(TEMPLATE_NOT_LOGGED.content.cloneNode(true));
       this._mobileRender();
       if (document.querySelector('.articles__results')) {
         document.querySelector('.articles__results').remove();

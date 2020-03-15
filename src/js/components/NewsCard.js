@@ -1,30 +1,23 @@
-/* eslint-disable import/no-cycle */
-import { MONTH_NAME } from '../constans/constans';
-import MainApi from '../api/MainApi';
-import SaveArticles from './SaveArtciles';
 
-const connection = new MainApi({
-  url: 'https://api.pridanov.site',
-  token: localStorage.getItem('token'),
-});
+import { MONTH_NAME, SERVER_URL, SAVE_ARTICLES_REGEXP } from '../constans/constans';
 
 export default class NewsCard {
-  constructor() {
+  constructor(classes) {
     this._container = '';
-    if (document.location.pathname === '/savearticles') {
+    if (SAVE_ARTICLES_REGEXP.test(document.location.pathname)) {
       this._mainContainer = document.querySelector('.saved-articles__card-container');
     }
+    this.connectionOnMainApi = (...args) => new classes.MainApi(...args);
+    this.classes = classes;
   }
 
 
   create(data) {
     this._container = document.createElement('article');
     this._container.classList.add('article');
-    this._container.setAttribute('index', data.indexNum);
-
+    if (SAVE_ARTICLES_REGEXP.test(document.location.pathname)) this._container.setAttribute('_id', data._id);
     const imgContainer = document.createElement('div');
     imgContainer.classList.add('article__image-container');
-
     const img = document.createElement('div');
     img.classList.add('article__image');
     img.setAttribute('style', `background-image: url(${data.image})`);
@@ -44,7 +37,7 @@ export default class NewsCard {
     notLoggedMsg.classList.add('article__signin-msg');
     notLoggedMsg.textContent = 'Войдите, чтобы сохранять статьи';
     const saveButton = document.createElement('button');
-    if (this.isLogin()) {
+    if (localStorage.getItem('token')) {
       saveButton.addEventListener('click', (e) => {
         this.renderIcons(data);
       });
@@ -60,7 +53,7 @@ export default class NewsCard {
     const contentName = document.createElement('h3');
     contentName.classList.add('article__content-name');
     contentName.textContent = data.keyword;
-    if (document.location.pathname === '/savearticles') {
+    if (SAVE_ARTICLES_REGEXP.test(document.location.pathname)) {
       imgContainer.append(img, deleteButton, deleteMsg, contentName);
     } else {
       imgContainer.append(img, saveButton, notLoggedMsg);
@@ -88,13 +81,6 @@ export default class NewsCard {
     return this._container;
   }
 
-  isLogin() {
-    if (localStorage && localStorage.getItem('token')) {
-      return true;
-    }
-    return false;
-  }
-
   changeDateFormat(date) {
     const newDate = new Date(date);
     const day = newDate.getDate();
@@ -106,10 +92,10 @@ export default class NewsCard {
   renderIcons(data) {
     const button = this._container.querySelector('.article__save-icon');
     const span = this._container.querySelector('.article__signin-msg');
-    if (this.isLogin()) {
+    if (localStorage.getItem('token')) {
       if (button.classList.contains('article__save-icon_active')) {
         if (button.getAttribute('_id')) {
-          connection.deleteArticle(button.getAttribute('_id'))
+          this.connectionOnMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).deleteArticle(button.getAttribute('_id'))
             .then(() => {
               button.removeAttribute('_id');
               button.classList.remove('article__save-icon_active');
@@ -117,7 +103,7 @@ export default class NewsCard {
             .catch((err) => console.log(err));
         }
       } else {
-        connection.createArticle(data)
+        this.connectionOnMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).createArticle(data)
           .then((data) => {
             button.setAttribute('_id', `${data._id}`);
             button.classList.add('article__save-icon_active');

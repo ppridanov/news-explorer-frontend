@@ -1,7 +1,8 @@
 export default class NewsApi {
-  constructor() {
-    this._apiKey = 'c35a0eed6bd34888a598b4e5fee41542';
-    this._url = 'http://newsapi.org';
+  constructor(url, key) {
+    this._apiKey = key;
+    console.log(key);
+    this._url = url;
   }
 
   render(value) {
@@ -16,7 +17,7 @@ export default class NewsApi {
         if (res.ok) {
           return res.json();
         }
-        return Promise.reject();
+        Promise.reject();
       });
   }
 }

@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: (chunkData) => (chunkData.chunk.name === 'main' ? '[name].[hash].js' : '[name]/[name].[hash].js'),
+    filename: '[name].[hash].js',
   },
   module: {
     rules: [
@@ -74,7 +74,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       template: './src/pages/savearticles/index.html',
-      filename: 'savearticles/index.html',
+      filename: 'savearticles.html',
     }),
     new WebpackMd5Hash(),
     new OptimizeCssAssetsPlugin({

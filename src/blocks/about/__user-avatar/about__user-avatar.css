@@ -1,3 +1,9 @@
+.about__user-avatar {
+  width: 450px;
+  height: 450px;
+  border-radius: 500px;
+}
+
 @media screen and (max-width: 1024px) {
   .about__user-avatar {
     width: 380px;

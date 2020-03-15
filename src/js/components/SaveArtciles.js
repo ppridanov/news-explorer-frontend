@@ -1,31 +1,32 @@
-/* eslint-disable import/no-cycle */
-/* eslint-disable no-return-assign */
-import MainApi from '../api/MainApi';
-import NewsCard from './NewsCard';
-
-const connection = new MainApi({
-  url: 'https://api.pridanov.site',
-  token: localStorage.getItem('token'),
-});
+import { SERVER_URL } from '../constans/constans';
+import isLogin from '../utils/scripts';
 
 export default class SaveArticles {
-  constructor() {
+  constructor(classes) {
     this._container = document.querySelector('.saved-articles__card-container');
     this._mainTitle = document.querySelector('.main-text__title');
     this._keywordText = document.querySelector('.main-text__word-key');
     this._keywordArray = [];
     this._newsArray = [];
+    this.connectionToMainApi = (...args) => new classes.MainApi(...args);
+    this.newsCard = (...args) => new classes.NewsCard(...args);
+    this.classes = classes;
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('article__delete-icon')) {
         const deleteButton = e.target;
-        connection.deleteArticle(deleteButton.getAttribute('_id'))
+        this.connectionToMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).deleteArticle(deleteButton.getAttribute('_id'))
           .then(() => {
             this._container.removeChild(e.target.closest('.article'));
             deleteButton.removeAttribute('_id');
             const articleCard = e.target.parentNode.parentNode;
-            const articleIndex = articleCard.getAttribute('index');
-            this._keywordArray.splice(articleIndex, 1);
-            this.renderKeywords();
+            const articleId = articleCard.getAttribute('_id');
+            this._newsArray.forEach((item, index) => {
+              if (articleId === item._id) {
+                this._newsArray.splice(index, 1);
+                this._keywordArray.splice(index, 1);
+                this.renderKeywords();
+              }
+            });
           })
           .catch((err) => console.log(err));
       }
@@ -33,11 +34,11 @@ export default class SaveArticles {
   }
 
   render() {
-    connection.getArticles()
+    this.connectionToMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).getArticles()
       .then((articlesArray) => {
         this._newsArray = articlesArray;
-        articlesArray.forEach((article, index) => {
-          const articlesElement = new NewsCard().create({
+        articlesArray.forEach((article) => {
+          const articlesElement = this.newsCard(this.classes).create({
             source: article.source,
             title: article.title,
             date: article.date,
@@ -46,7 +47,6 @@ export default class SaveArticles {
             link: article.link,
             keyword: article.keyword,
             _id: article._id,
-            indexNum: index,
           });
           this._keywordArray.push(article.keyword);
           this._container.appendChild(articlesElement);
@@ -59,7 +59,7 @@ export default class SaveArticles {
   renderKeywords() {
     const result = {};
     this._keywordArray.forEach((item) => {
-      result[item] = result[item] + 1 || 1;
+      result[item] = result[item.keyword] + 1 || 1;
     });
     const keywordSorted = Object.keys(result).sort((a, b) => result[b] - result[a]);
     let saveArticlesText = '';
@@ -83,9 +83,9 @@ export default class SaveArticles {
     } else {
       keyWordsText = `${keywordSorted[0]}`;
     }
-    connection.getUserInfo()
-      .then((data) => {
-        this._mainTitle.textContent = `${data.name}, у Вас ${this._keywordArray.length} ${saveArticlesText}`;
+    this.connectionToMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).getUserInfo()
+      .then((user) => {
+        this._mainTitle.textContent = `${user.name}, у Вас ${this._keywordArray.length} ${saveArticlesText}`;
         this._keywordText.textContent = keyWordsText;
       })
       .catch((err) => console.log(err));

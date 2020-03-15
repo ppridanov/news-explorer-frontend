@@ -1,7 +1,7 @@
 export default class MainApi {
   constructor(options) {
-    this.url = options.url;
-    this.token = options.token;
+    this.url = options.SERVER_URL;
+    this.token = options.TOKEN;
   }
 
   signinUser(emailValue, passwordValue) {
@@ -52,7 +52,6 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
-        Promise.reject();
       });
   }
 
@@ -66,7 +65,6 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
-        Promise.reject();
       });
   }
 
@@ -81,7 +79,6 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
-        Promise.reject();
       });
   }
 
@@ -95,7 +92,6 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
-        Promise.reject();
       });
   }
 }

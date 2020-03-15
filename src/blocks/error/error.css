@@ -7,6 +7,12 @@
     color: #FF0000;
     display: block;
     opacity: 0;
+    transition: ease-out 1s;
+}
+
+.error-message_active {
+  transition: ease-in 1s;
+  opacity: 1;
 }
 
 .error__email-used {

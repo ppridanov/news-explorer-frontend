@@ -9,3 +9,8 @@
   color: #1A1B22;
   cursor: pointer;
 }
+
+.footer__link:hover {
+  opacity: .6;
+  transition: ease-in .3s;
+}

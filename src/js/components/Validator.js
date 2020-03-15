@@ -1,8 +1,8 @@
-/* eslint-disable no-new */
-import MainApi from '../api/MainApi';
-// eslint-disable-next-line import/no-cycle
-import Popup from './Popup';
-import { EMAIL_REGEXP, NAME_REGEXP } from '../constans/constans';
+import {
+  EMAIL_REGEXP,
+  NAME_REGEXP,
+  SERVER_URL,
+} from '../constans/constans';
 import {
   SERVER_BAD_REQUEST_ERROR,
   SERVER_INTERNAL_ERROR,
@@ -14,21 +14,19 @@ import {
   INPUT_SMALL_NAME_ERROR,
   INPUT_SMALL_PASS_ERROR,
 } from '../constans/error-constans';
-import Header from './Header';
-
-const connection = new MainApi({
-  url: 'https://api.pridanov.site',
-  token: localStorage.getItem('token'),
-});
-
+import isLogin from '../utils/scripts';
 
 export default class Validator {
-  constructor(form) {
+  constructor(form, classes) {
     this._form = document.forms[form];
     this._button = this._form.elements.button;
     this._inputs = Array.from(this._form).filter((item) => item.nodeName === 'INPUT');
     this._setEventListener(this._inputs, this._form);
     this._disableButton();
+    this.connection = (...args) => new classes.MainApi(...args);
+    this.popup = (...args) => new classes.Popup(...args);
+    this.header = (...args) => new classes.Header(...args);
+    this.classes = classes;
   }
 
   setServerError(res) {
@@ -126,6 +124,20 @@ export default class Validator {
     this._button.setAttribute('disabled', true);
   }
 
+  _disableFormElements(form) {
+    form.forEach((elem) => {
+      elem.setAttribute('disabled', true);
+      elem.setAttribute('style', 'background: grey');
+    });
+  }
+
+  _enableFormElements(form) {
+    form.forEach((elem) => {
+      elem.removeAttribute('disabled', true);
+      elem.removeAttribute('style', 'background: grey');
+    });
+  }
+
   _checkForm(inputs) {
     let isValidForm = true;
     inputs.forEach((elem) => {
@@ -147,13 +159,21 @@ export default class Validator {
     const formName = form.dataset.form;
     const serverErrorSpan = form.querySelector('.error__server-error');
     if (formName === 'login') {
-      connection.signinUser(inputs[0].value, inputs[1].value)
-        .then((res) => (res.ok ? res.json() : this.setServerError(res)))
+      this.connection({ SERVER_URL, TOKEN: localStorage.getItem('token') }).signinUser(inputs[0].value, inputs[1].value)
+        .then((res) => {
+          this._disableFormElements(this._form);
+          if (res.ok) {
+            return res.json();
+          }
+          this.setServerError(res);
+        })
         .then((res) => {
           localStorage.setItem('token', res.jwt);
-          new Popup('#signin-tpl').render();
-          new Header().clearContent();
-          new Header().render();
+          if (localStorage.getItem('token')) {
+            this.popup('#signup-tpl', this.classes).render();
+            this.header(this.classes).clearContent();
+            this.header(this.classes).render();
+          }
         })
         .catch((error) => {
           if (error.message == 'Failed to fetch') {
@@ -163,11 +183,12 @@ export default class Validator {
           serverErrorSpan.textContent = error.message;
         });
     } else if (formName === 'signup') {
-      connection.signupUser(inputs[0].value, inputs[1].value, inputs[2].value)
+      this.connection({ SERVER_URL, TOKEN: localStorage.getItem('token') })
+        .signupUser(inputs[0].value, inputs[1].value, inputs[2].value)
         .then((res) => (res.ok ? res.json() : this.setServerError(res)))
         .then(() => {
-          new Popup('#signin-tpl').render();
-          new Popup('#thanks-tpl').open();
+          this.popup('#signin-tpl', this.classes).render();
+          this.popup('#thanks-tpl', this.classes).open();
         })
         .catch((error) => {
           if (error.message == 'Failed to fetch') {
@@ -175,6 +196,9 @@ export default class Validator {
             return;
           }
           serverErrorSpan.textContent = error.message;
+        })
+        .finnaly(() => {
+
         });
     }
   }
