@@ -4,13 +4,13 @@
   font-size: 18px;
   line-height: 24px;
   color: #B6BCBF;
-  transition: ease-out .5s;
+  transition: ease-out .3s;
 }
 
 .nav__link:hover {
   opacity: 0.6;
   padding: 24px 0;
-  transition: ease-in .5s;
+  transition: ease-in .3s;
 }
 
 .nav__link_active {

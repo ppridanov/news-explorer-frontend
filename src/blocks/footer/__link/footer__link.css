@@ -8,6 +8,7 @@
   text-align: center;
   color: #1A1B22;
   cursor: pointer;
+  transition: ease-out .3s;
 }
 
 .footer__link:hover {

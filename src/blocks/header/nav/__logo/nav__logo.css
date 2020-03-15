@@ -7,6 +7,7 @@
   color: #fff;
   text-decoration: none;
   margin-top: 30px;
+  transition: ease-out .3s;
 }
 
 .nav__logo_black-theme {
@@ -17,4 +18,9 @@
   .nav__logo {
     margin-top: 0;
   }
+}
+
+.nav__logo:hover {
+  opacity: .8;
+  transition: ease-in .3s;
 }
