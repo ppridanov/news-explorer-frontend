@@ -9,7 +9,7 @@ const INPUT_SMALL_PASS_ERROR = 'Длинна пароля должна быть 
 const INPUT_NOT_NAME_ERROR = 'Неправильный формат имени. Пример: \'Петр\'';
 const INPUT_SMALL_NAME_ERROR = 'Должно быть от 2 до 30 символов';
 
-export {
+const errorConstants = {
   SERVER_BAD_REQUEST_ERROR,
   SERVER_INTERNAL_ERROR,
   SERVER_NOT_AUTHORIZED_ERROR,
@@ -20,3 +20,5 @@ export {
   INPUT_SMALL_NAME_ERROR,
   INPUT_SMALL_PASS_ERROR,
 };
+
+export default errorConstants;

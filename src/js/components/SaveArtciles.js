@@ -1,20 +1,20 @@
-import { SERVER_URL } from '../constans/constans';
-import isLogin from '../utils/scripts';
-
 export default class SaveArticles {
-  constructor(classes) {
+  constructor(config) {
+    this._config = config;
     this._container = document.querySelector('.saved-articles__card-container');
     this._mainTitle = document.querySelector('.main-text__title');
     this._keywordText = document.querySelector('.main-text__word-key');
+    this._serverUrl = this._config.constants.SERVER_URL;
     this._keywordArray = [];
     this._newsArray = [];
-    this.connectionToMainApi = (...args) => new classes.MainApi(...args);
-    this.newsCard = (...args) => new classes.NewsCard(...args);
-    this.classes = classes;
+    this._serverUrl = this._config.constants.SERVER_URL;
+    this._login = this._config.funcs.isLogin;
+    this.connectionToMainApi = this._config.funcs.mainApi;
+    this.newsCard = this._config.funcs.newsCard;
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('article__delete-icon')) {
         const deleteButton = e.target;
-        this.connectionToMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).deleteArticle(deleteButton.getAttribute('_id'))
+        this.connectionToMainApi(this._serverUrl, localStorage.getItem('token')).deleteArticle(deleteButton.getAttribute('_id'))
           .then(() => {
             this._container.removeChild(e.target.closest('.article'));
             deleteButton.removeAttribute('_id');
@@ -34,11 +34,11 @@ export default class SaveArticles {
   }
 
   render() {
-    this.connectionToMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).getArticles()
+    this.connectionToMainApi(this._serverUrl, localStorage.getItem('token')).getArticles()
       .then((articlesArray) => {
         this._newsArray = articlesArray;
         articlesArray.forEach((article) => {
-          const articlesElement = this.newsCard(this.classes).create({
+          const articlesElement = this.newsCard(this._config).create({
             source: article.source,
             title: article.title,
             date: article.date,
@@ -83,7 +83,7 @@ export default class SaveArticles {
     } else {
       keyWordsText = `${keywordSorted[0]}`;
     }
-    this.connectionToMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).getUserInfo()
+    this.connectionToMainApi(this._serverUrl, localStorage.getItem('token')).getUserInfo()
       .then((user) => {
         this._mainTitle.textContent = `${user.name}, у Вас ${this._keywordArray.length} ${saveArticlesText}`;
         this._keywordText.textContent = keyWordsText;

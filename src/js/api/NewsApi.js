@@ -1,7 +1,6 @@
 export default class NewsApi {
   constructor(url, key) {
     this._apiKey = key;
-    console.log(key);
     this._url = url;
   }
 

@@ -1,23 +1,19 @@
-import {
-  SERVER_URL,
-  TEMPLATE_IS_LOGGED,
-  TEMPLATE_NOT_LOGGED,
-  SAVE_ARTICLES_REGEXP,
-} from '../constans/constans';
-import { isLogin } from '../utils/scripts';
-
 export default class Header {
-  constructor(classes) {
+  constructor(config) {
     this._container = document.querySelector('.header');
-    this.connection = (...args) => new classes.MainApi(...args);
+    this._serverUrl = config.constants.SERVER_URL;
+    this._selectors = config.selectors;
+    this._isLogged = config.funcs.isLogin;
+    this._mainApi = config.funcs.mainApi;
+    this._regExps = config.regExps;
   }
 
   render() {
-    if (!isLogin() && SAVE_ARTICLES_REGEXP.test(document.location.pathname)) document.location.href = '../';
+    if (!this._isLogged() && this._regExps.SAVE_ARTICLES_REGEXP.test(document.location.pathname)) document.location.href = '../';
     if (localStorage != undefined && localStorage.getItem('token')) {
-      this._container.prepend(TEMPLATE_IS_LOGGED.content.cloneNode(true));
+      this._container.prepend(this._selectors.HEADER_TEMPLATE_IS_LOGGED.content.cloneNode(true));
       const logOutButton = this._container.querySelector('.nav__logout-button');
-      this.connection({ SERVER_URL, TOKEN: localStorage.getItem('token') }).getUserInfo()
+      this._mainApi(this._serverUrl, localStorage.getItem('token')).getUserInfo()
         .then((res) => {
           logOutButton.textContent = res.name;
         })
@@ -25,7 +21,7 @@ export default class Header {
       this._setEventListener();
       this._mobileRender();
     } else {
-      this._container.prepend(TEMPLATE_NOT_LOGGED.content.cloneNode(true));
+      this._container.prepend(this._selectors.HEADER_TEMPLATE_NOT_LOGGED.content.cloneNode(true));
       this._mobileRender();
       if (document.querySelector('.articles__results')) {
         document.querySelector('.articles__results').remove();

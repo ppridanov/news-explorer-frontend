@@ -1,21 +1,20 @@
-
-import { MONTH_NAME, SERVER_URL, SAVE_ARTICLES_REGEXP } from '../constans/constans';
-
 export default class NewsCard {
-  constructor(classes) {
+  constructor(config) {
+    this._config = config;
+    this._regExps = config.regExps;
+    this._constants = config.constants;
     this._container = '';
-    if (SAVE_ARTICLES_REGEXP.test(document.location.pathname)) {
+    if (this._regExps.SAVE_ARTICLES_REGEXP.test(document.location.pathname)) {
       this._mainContainer = document.querySelector('.saved-articles__card-container');
     }
-    this.connectionOnMainApi = (...args) => new classes.MainApi(...args);
-    this.classes = classes;
+    this.connectionOnMainApi = config.funcs.mainApi;
   }
 
 
   create(data) {
     this._container = document.createElement('article');
     this._container.classList.add('article');
-    if (SAVE_ARTICLES_REGEXP.test(document.location.pathname)) this._container.setAttribute('_id', data._id);
+    if (this._regExps.SAVE_ARTICLES_REGEXP.test(document.location.pathname)) this._container.setAttribute('_id', data._id);
     const imgContainer = document.createElement('div');
     imgContainer.classList.add('article__image-container');
     const img = document.createElement('div');
@@ -53,7 +52,7 @@ export default class NewsCard {
     const contentName = document.createElement('h3');
     contentName.classList.add('article__content-name');
     contentName.textContent = data.keyword;
-    if (SAVE_ARTICLES_REGEXP.test(document.location.pathname)) {
+    if (this._regExps.SAVE_ARTICLES_REGEXP.test(document.location.pathname)) {
       imgContainer.append(img, deleteButton, deleteMsg, contentName);
     } else {
       imgContainer.append(img, saveButton, notLoggedMsg);
@@ -85,7 +84,7 @@ export default class NewsCard {
     const newDate = new Date(date);
     const day = newDate.getDate();
     const year = newDate.getFullYear();
-    const month = MONTH_NAME[newDate.getMonth()];
+    const month = this._constants.MONTH_NAME[newDate.getMonth()];
     return `${day} ${month}, ${year}`;
   }
 
@@ -95,7 +94,7 @@ export default class NewsCard {
     if (localStorage.getItem('token')) {
       if (button.classList.contains('article__save-icon_active')) {
         if (button.getAttribute('_id')) {
-          this.connectionOnMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).deleteArticle(button.getAttribute('_id'))
+          this.connectionOnMainApi(this._constants.SERVER_URL, localStorage.getItem('token')).deleteArticle(button.getAttribute('_id'))
             .then(() => {
               button.removeAttribute('_id');
               button.classList.remove('article__save-icon_active');
@@ -103,7 +102,7 @@ export default class NewsCard {
             .catch((err) => console.log(err));
         }
       } else {
-        this.connectionOnMainApi({ SERVER_URL, TOKEN: localStorage.getItem('token') }).createArticle(data)
+        this.connectionOnMainApi(this._constants.SERVER_URL, localStorage.getItem('token')).createArticle(data)
           .then((data) => {
             button.setAttribute('_id', `${data._id}`);
             button.classList.add('article__save-icon_active');

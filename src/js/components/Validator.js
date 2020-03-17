@@ -1,43 +1,29 @@
-import {
-  EMAIL_REGEXP,
-  NAME_REGEXP,
-  SERVER_URL,
-} from '../constans/constans';
-import {
-  SERVER_BAD_REQUEST_ERROR,
-  SERVER_INTERNAL_ERROR,
-  SERVER_NOT_AUTHORIZED_ERROR,
-  SERVER_NOT_FOUND_ERROR,
-  INPUT_IS_EMPTY_ERROR,
-  INPUT_NOT_NAME_ERROR,
-  INPUT_NOT_EMAIL_ERROR,
-  INPUT_SMALL_NAME_ERROR,
-  INPUT_SMALL_PASS_ERROR,
-} from '../constans/error-constans';
-import isLogin from '../utils/scripts';
-
 export default class Validator {
-  constructor(form, classes) {
-    this._form = document.forms[form];
-    this._button = this._form.elements.button;
+  constructor(form, config) {
+    this._errorElement = '';
+    this._config = config;
+    this._form = document.querySelector(`.form__${form}`);
+    this._button = this._form.querySelector('.form__button_save');
     this._inputs = Array.from(this._form).filter((item) => item.nodeName === 'INPUT');
+    this.connection = config.funcs.mainApi;
+    this.popup = config.funcs.popup;
+    this.header = config.funcs.header;
+    this._regExps = config.regExps;
+    this._serverUrl = config.constants.SERVER_URL;
+    this._errorConstants = config.errorConstants;
     this._setEventListener(this._inputs, this._form);
     this._disableButton();
-    this.connection = (...args) => new classes.MainApi(...args);
-    this.popup = (...args) => new classes.Popup(...args);
-    this.header = (...args) => new classes.Header(...args);
-    this.classes = classes;
   }
 
   setServerError(res) {
     if (res.status === 500) {
-      throw new Error(SERVER_INTERNAL_ERROR);
+      throw new Error(this._errorConstants.SERVER_INTERNAL_ERROR);
     } else if (res.status === 401) {
-      throw new Error(SERVER_NOT_AUTHORIZED_ERROR);
+      throw new Error(this._errorConstants.SERVER_NOT_AUTHORIZED_ERROR);
     } else if (res.status === 404) {
-      throw new Error(SERVER_NOT_FOUND_ERROR);
+      throw new Error(this._errorConstants.SERVER_NOT_FOUND_ERROR);
     } else if (res.status === 400) {
-      throw new Error(SERVER_BAD_REQUEST_ERROR);
+      throw new Error(this._errorConstants.SERVER_BAD_REQUEST_ERROR);
     } else if (res.message === 'Такой почтовый ящик уже существует') {
       throw new Error(res.message);
     }
@@ -59,42 +45,40 @@ export default class Validator {
 
   _validate(element) {
     const errorMessages = {
-      isempty: INPUT_IS_EMPTY_ERROR,
-      notmail: INPUT_NOT_EMAIL_ERROR,
-      littlepass: INPUT_SMALL_PASS_ERROR,
-      notname: INPUT_NOT_NAME_ERROR,
-      littlename: INPUT_SMALL_NAME_ERROR,
+      isempty: this._errorConstants.INPUT_IS_EMPTY_ERROR,
+      notmail: this._errorConstants.INPUT_NOT_EMAIL_ERROR,
+      littlepass: this._errorConstants.INPUT_SMALL_PASS_ERROR,
+      notname: this._errorConstants.INPUT_NOT_NAME_ERROR,
+      littlename: this._errorConstants.INPUT_SMALL_NAME_ERROR,
     };
-    const errorElement = document.querySelector(`.error__${element.name}`);
+    this._errorElement = document.querySelector(`.error__${element.name}`);
     if (!element.checkValidity()) {
-      errorElement.textContent = errorMessages.isempty;
+      this._errorElement.textContent = errorMessages.isempty;
       this.activateError(element);
       return false;
     }
     if (element.name == 'password') {
       if (element.value.length < 8) {
-        errorElement.textContent = errorMessages.littlepass;
+        this._errorElement.textContent = errorMessages.littlepass;
         this.activateError(element);
         return false;
       }
     }
     if (element.name == 'email') {
-      const emailRegExp = EMAIL_REGEXP;
-      if (!emailRegExp.test(element.value)) {
-        errorElement.textContent = errorMessages.notmail;
+      if (!this._regExps.EMAIL_REGEXP.test(element.value)) {
+        this._errorElement.textContent = errorMessages.notmail;
         this.activateError(element);
         return false;
       }
     }
     if (element.name == 'name') {
-      const nameRegExp = NAME_REGEXP;
-      if (!nameRegExp.test(element.value)) {
-        errorElement.textContent = errorMessages.notname;
+      if (!this._regExps.NAME_REGEXP.test(element.value)) {
+        this._errorElement.textContent = errorMessages.notname;
         this.activateError(element);
         return false;
       }
       if (element.value.length < 2 || element.value.length > 30) {
-        errorElement.textContent = errorMessages.littlename;
+        this._errorElement.textContent = errorMessages.littlename;
         this.activateError(element);
         return false;
       }
@@ -159,7 +143,7 @@ export default class Validator {
     const formName = form.dataset.form;
     const serverErrorSpan = form.querySelector('.error__server-error');
     if (formName === 'login') {
-      this.connection({ SERVER_URL, TOKEN: localStorage.getItem('token') }).signinUser(inputs[0].value, inputs[1].value)
+      this.connection(this._serverUrl, localStorage.getItem('token')).signinUser(inputs[0].value, inputs[1].value)
         .then((res) => {
           this._disableFormElements(this._form);
           if (res.ok) {
@@ -170,20 +154,21 @@ export default class Validator {
         .then((res) => {
           localStorage.setItem('token', res.jwt);
           if (localStorage.getItem('token')) {
-            this.popup('#signup-tpl', this.classes).render();
-            this.header(this.classes).clearContent();
-            this.header(this.classes).render();
+            this.popup('#signup-tpl', this._config).render();
+            this.header(this._config).clearContent();
+            this.header(this._config).render();
           }
         })
         .catch((error) => {
           if (error.message == 'Failed to fetch') {
-            serverErrorSpan.textContent = SERVER_INTERNAL_ERROR;
+            serverErrorSpan.textContent = this._errorConstants.SERVER_INTERNAL_ERROR;
             return;
           }
           serverErrorSpan.textContent = error.message;
+          console.log(error);
         });
     } else if (formName === 'signup') {
-      this.connection({ SERVER_URL, TOKEN: localStorage.getItem('token') })
+      this.connection(this._serverUrl, localStorage.getItem('token'))
         .signupUser(inputs[0].value, inputs[1].value, inputs[2].value)
         .then((res) => (res.ok ? res.json() : this.setServerError(res)))
         .then(() => {
@@ -192,7 +177,7 @@ export default class Validator {
         })
         .catch((error) => {
           if (error.message == 'Failed to fetch') {
-            serverErrorSpan.textContent = SERVER_INTERNAL_ERROR;
+            serverErrorSpan.textContent = this._errorConstants.SERVER_INTERNAL_ERROR;
             return;
           }
           serverErrorSpan.textContent = error.message;

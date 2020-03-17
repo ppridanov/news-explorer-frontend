@@ -1,22 +1,22 @@
-import { NEWS_URL, API_KEY } from '../constans/constans';
-
 export default class NewsCardList {
-  constructor(classes) {
+  constructor(config) {
+    this._config = config;
     this._newsArray = [];
     this._value = '';
     this._resultsCard = undefined;
-    this._form = document.forms.search;
-    this._input = this._form.elements.searchinput;
-    this._button = this._form.elements.button;
-    this._resultContainer = document.querySelector('.articles__results-container');
-    this._templateNotFound = document.querySelector('#results-not-found');
-    this._templateSearchIsLoading = document.querySelector('#results-is-loading');
-    this._templateFound = document.querySelector('#results-found');
-    this._errorSpan = document.querySelector('.error__searchinput');
+    this._form = this._config.selectors.SEARCH_FORM;
+    this._input = this._config.selectors.SEARCH_INPUT;
+    this._button = this._config.selectors.SEARCH_BUTTON;
+    this._resultContainer = this._config.selectors.RESULTS_CONTAINER;
+    this._templateNotFound = this._config.selectors.NEWSCARD_TEMPLATE_NOT_FOUND;
+    this._templateSearchIsLoading = this._config.selectors.NEWSCARD_TEMPLATE_IS_LOADING;
+    this._templateFound = this._config.selectors.NEWSCARD_TEMPLATE_FOUND;
+    this._errorSpan = this._config.selectors.ERROR_SPAN;
+    this._newsUrl = this._config.constants.NEWS_URL;
+    this._newsApi = this._config.constants.API_KEY;
+    this.connectionToNews = this._config.funcs.newsApi;
+    this.newsCard = this._config.funcs.newsCard;
     this._setHandlers();
-    this.connectionToNews = (...args) => new classes.NewsApi(...args);
-    this.newsCard = (...args) => new classes.NewsCard(...args);
-    this.classes = classes;
   }
 
   _setHandlers() {
@@ -51,8 +51,9 @@ export default class NewsCardList {
     this._disableSearchForm();
     this._input.setAttribute('disabled', true);
     this._resultContainer.append(this._templateSearchIsLoading.content.cloneNode(true));
-    this.connectionToNews(NEWS_URL, API_KEY).render(this._value)
+    this.connectionToNews(this._newsUrl, this._newsApi).render(this._value)
       .then((array) => {
+        console.log(array.articles);
         this._resultContainer.removeChild(document.querySelector('.articles__results'));
         if (array.totalResults === 0) {
           this._resultContainer.append(this._templateNotFound.content.cloneNode(true));
@@ -66,7 +67,7 @@ export default class NewsCardList {
         if (this._someCardsArray.length === 0) document.querySelector('.articles__next-button').setAttribute('style', 'display: none');
         this._newsArray = this._newsArray.slice(3);
         this._someCardsArray.forEach((item) => {
-          const articlesElement = this.newsCard(this.classes).create({
+          const articlesElement = this.newsCard(this._config).create({
             source: item.source.name,
             title: item.title,
             date: item.publishedAt.slice(0, -10),
@@ -102,7 +103,7 @@ export default class NewsCardList {
       document.querySelector('.articles-container').setAttribute('style', 'margin-bottom: 86px');
     }
     array.forEach((item) => {
-      const articlesElement = this.newsCard(this.classes).create({
+      const articlesElement = this.newsCard(this._config).create({
         source: item.source.name,
         title: item.title,
         date: item.publishedAt.slice(0, -10),
