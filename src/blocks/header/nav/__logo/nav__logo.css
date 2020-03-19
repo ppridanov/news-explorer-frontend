@@ -1,0 +1,26 @@
+.nav__logo {
+  font-family: 'RobotoSlab', 'Times New Roman';
+  font-style: normal;
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  text-decoration: none;
+  margin-top: 30px;
+  transition: ease-out .3s;
+}
+
+.nav__logo_black-theme {
+  color: #1A1B22;
+}
+
+@media screen and (max-width: 640px) {
+  .nav__logo {
+    margin-top: 0;
+  }
+}
+
+.nav__logo:hover {
+  opacity: .8;
+  transition: ease-in .3s;
+}

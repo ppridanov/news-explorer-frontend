@@ -1,0 +1,20 @@
+.error-message {
+    font-family: "Inter", "Times New Roman";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    display: block;
+    opacity: 0;
+    transition: ease-out 1s;
+}
+
+.error-message_active {
+  transition: ease-in 1s;
+  opacity: 1;
+}
+
+.error__email-used {
+  text-align: center;
+}

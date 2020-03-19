@@ -1,0 +1,4 @@
+.form__input-container_invalid .error-message {
+    opacity: 1;
+    transition: ease-in .4s;
+}

@@ -1,0 +1,25 @@
+.error__searchinput {
+  position: absolute;
+  right: 35%;
+  top: 17px;
+  width: 300px;
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .error__searchinput {
+    position: absolute;
+    right: 43%;
+    top: 2px;
+    width: 109px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .error__searchinput {
+    width: 50%;
+    position: absolute;
+    right: 25%;
+    top: 16px;
+  }
+}
